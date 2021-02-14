@@ -178,7 +178,11 @@ class LevelState extends FlxState {
 		enemy.health -= bullet.atk;
 		if (enemy.health <= 0) {
 			enemy.kill();
+			levelScore += 100;
 		}
+
+		// Update Score
+		hud.setScore(levelScore);
 	}
 
 	public function processLevel(elapsed:Float) {

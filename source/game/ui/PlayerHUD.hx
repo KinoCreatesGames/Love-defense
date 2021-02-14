@@ -3,6 +3,8 @@ package game.ui;
 class PlayerHUD extends FlxTypedGroup<FlxSprite> {
 	public var timer:Float;
 	public var timerText:FlxText;
+	public var score:Float;
+	public var scoreText:FlxText;
 	public var heartHealthBar:FlxBar;
 	public var heart:FlxSprite;
 
@@ -15,6 +17,7 @@ class PlayerHUD extends FlxTypedGroup<FlxSprite> {
 	public function create() {
 		createTimer();
 		createHeartHealth();
+		createScore();
 	}
 
 	public function createTimer() {
@@ -35,6 +38,15 @@ class PlayerHUD extends FlxTypedGroup<FlxSprite> {
 		add(heartHealthBar);
 	}
 
+	public function createScore() {
+		var padding = 12;
+		score = 0;
+		scoreText = new FlxText(0, padding, -1, 'Score 0', Globals.FONT_N);
+		scoreText.text = 'Score  ${score}';
+		scoreText.x = FlxG.width - (scoreText.width + padding);
+		add(scoreText);
+	}
+
 	override public function update(elapsed:Float) {
 		super.update(elapsed);
 	}
@@ -46,5 +58,16 @@ class PlayerHUD extends FlxTypedGroup<FlxSprite> {
 
 	public function updateTimer() {
 		timerText.text = 'Time  ${Math.ceil(timer)}';
+	}
+
+	public function setScore(value:Float) {
+		score = value;
+		updateScore();
+	}
+
+	public function updateScore() {
+		var padding = 12;
+		scoreText.text = 'Score  ${score}';
+		scoreText.x = FlxG.width - (scoreText.width + padding);
 	}
 }
