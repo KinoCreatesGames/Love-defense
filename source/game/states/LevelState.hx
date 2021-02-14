@@ -1,5 +1,11 @@
 package game.states;
 
+import flixel.FlxObject;
+import flixel.tile.FlxBaseTilemap.FlxTilemapAutoTiling;
+import flixel.tile.FlxTilemap;
+import flixel.addons.editors.tiled.TiledTileSet;
+import flixel.addons.editors.tiled.TiledTileLayer;
+import flixel.addons.editors.tiled.TiledObjectLayer;
 import flixel.addons.editors.tiled.TiledMap;
 
 class LevelState extends FlxState {
@@ -8,21 +14,174 @@ class LevelState extends FlxState {
 	 */
 	public var setupTime:Float;
 
+	public var levelTime:Float;
+
 	/**
 	 *  Amount of points available for creating a turret 
 	 */
 	public var turretPoints:Int;
 
+	public var heart:FlxSprite;
+
+	public var completeLevel:Bool;
+	public var gameOver:Bool;
+	public var levelScore = 0;
+
 	public var map:TiledMap;
+
+	public var playerTurrets:FlxTypedGroup<Turret>;
+	public var turretPositions:FlxTypedGroup<FlxSprite>;
+	public var enemySpawnPositions:FlxTypedGroup<FlxSprite>;
+	public var levelGrp:FlxTypedGroup<FlxTilemap>;
+	public var decorationGrp:FlxTypedGroup<FlxTilemap>;
+	public var enemyGrp:FlxTypedGroup<Enemy>;
+	public var playerBullets:FlxTypedGroup<Bullet>;
 
 	override public function create() {
 		super.create();
+		completeLevel = false;
+		gameOver = false;
+		levelScore = 0;
+		setSetupTime();
+		setLevelTime();
 		createLevel();
 	}
 
-	public function createLevel() {}
+	/**
+	 * By default 60 seconds
+	 */
+	public function setSetupTime() {
+		setupTime = 60.0;
+	}
+
+	/**
+	 * By default 120 seconds
+	 */
+	public function setLevelTime() {
+		levelTime = 120.0;
+	}
+
+	public function createLevel(?levelName:String) {
+		final map = new TiledMap(levelName);
+		this.map = map;
+		final turretPositionLayer:TiledObjectLayer = cast(map.getLayer('TurretPositions'));
+		final enemySpawnPositionLayer:TiledObjectLayer = cast(map.getLayer('EnemyPositions'));
+		final tileLayer:TiledTileLayer = cast(map.getLayer('Level'));
+
+		// Create Groups And Level
+		playerTurrets = new FlxTypedGroup<Turret>();
+		playerBullets = new FlxTypedGroup<Bullet>();
+		turretPositions = new FlxTypedGroup<FlxSprite>();
+		enemySpawnPositions = new FlxTypedGroup<FlxSprite>();
+		enemyGrp = new FlxTypedGroup<Enemy>();
+		levelGrp = new FlxTypedGroup<FlxTilemap>();
+
+		// Add Level
+		createLevelMap(tileLayer);
+		// Add Groups
+		add(levelGrp);
+		add(turretPositions);
+		add(enemySpawnPositions);
+		add(enemyGrp);
+		add(playerTurrets);
+		add(playerBullets);
+	}
+
+	public function createLevelMap(tileLayer:TiledTileLayer) {
+		// Gets Tiled Image Data
+		var tileset:TiledTileSet = map.getTileSet('floor-tileset');
+		var tilesetPath = AssetPaths.floor_tileset__png;
+
+		if (tileLayer == null) {
+			// get with prefix
+			tileLayer = null;
+		} else {
+			addLevelToGrp(tileLayer, tilesetPath, tileset);
+		}
+	}
+
+	public function addLevelToGrp(tileLayer:TiledTileLayer,
+			tilesetPath:String, tileset:TiledTileSet) {
+		var level = new FlxTilemap();
+		level.loadMapFromArray(tileLayer.tileArray, map.width, map.height,
+			tilesetPath, map.tileWidth, map.tileHeight,
+			FlxTilemapAutoTiling.OFF, tileset.firstGID, 1);
+		levelGrp.add(level);
+	}
+
+	public function createDecorationLayers() {
+		var tileset:TiledTileSet = map.getTileSet('Dungeon_tiles');
+		// This works because it has an ID given by Flixel
+		var tilesetPath = AssetPaths.floor_tileset__png;
+		var decorLayerPrefix = 'Decor_';
+		trace(map.layers.length);
+		for (i in 0...map.layers.length) {
+			var tileLayer:TiledTileLayer = cast(map.getLayer(decorLayerPrefix
+				+ i));
+
+			if (tileLayer != null) {
+				final levelDecoration = new FlxTilemap();
+				levelDecoration.loadMapFromArray(tileLayer.tileArray,
+					map.width, map.height, tilesetPath, map.tileWidth,
+					map.tileHeight, FlxTilemapAutoTiling.OFF,
+					tileset.firstGID, 1, FlxObject.NONE);
+				decorationGrp.add(levelDecoration);
+			}
+		};
+	}
+
+	public function createLevelLayers() {}
+
+	public function createTurretPositions() {}
 
 	override public function update(elapsed:Float) {
 		super.update(elapsed);
+		processPause();
+		processCollisions();
+		processLevel(elapsed);
+	}
+
+	public function processPause() {
+		if (FlxG.keys.anyJustPressed([ESCAPE])) {
+			trace('Pause Game');
+			openSubState(new PauseSubState());
+		}
+	}
+
+	public function processCollisions() {
+		FlxG.overlap(enemyGrp, heart, enemyTouchHeart);
+	}
+
+	public function enemyTouchHeart(enemy:Enemy, heart:FlxSprite) {
+		heart.health -= enemy.atk;
+		enemy.kill();
+		if (heart.health <= 0) {
+			heart.kill();
+		}
+	}
+
+	public function playerBulletTouchEnemy(bullet:Bullet, enemy:Enemy) {
+		enemy.health -= bullet.atk;
+		if (enemy.health <= 0) {
+			enemy.kill();
+		}
+	}
+
+	public function processLevel(elapsed:Float) {
+		if (setupTime >= 0) {
+			setupTime -= elapsed;
+		} else if (setupTime <= 0) {
+			// Start Level Time
+			if (levelTime <= 0 && heart.alive) {
+				// complete level
+				completeLevel = true;
+			} else {
+				levelTime -= elapsed;
+			}
+		}
+
+		if (!heart.alive) {
+			gameOver = true;
+		}
 	}
 }

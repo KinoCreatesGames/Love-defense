@@ -29,7 +29,7 @@ class TitleState extends FlxState {
 		completeFadeStart = false;
 		createPressStart();
 		createButtons();
-		createControls();
+		// createControls();
 		createCredits();
 		createVersion();
 		super.create();
@@ -39,7 +39,7 @@ class TitleState extends FlxState {
 		pressStartText = new FlxText(0, 0, -1, 'Press Any Button To Start',
 			Globals.FONT_N);
 		pressStartText.screenCenter();
-		pressStartText.y += 120;
+		pressStartText.y += 40;
 		// add later
 		add(pressStartText);
 		pressStartText.flicker(0, .4);
@@ -47,6 +47,7 @@ class TitleState extends FlxState {
 
 	public function createButtons() {
 		// Create Buttons
+		var spacing = 16;
 		var y = 40;
 		playButton = new TextButton(0, 0, Globals.TEXT_START, Globals.FONT_N,
 			clickStart);
@@ -54,28 +55,28 @@ class TitleState extends FlxState {
 		playButton.clickColor = KColor.BURGUNDY;
 		playButton.screenCenter();
 		playButton.y += y;
-		y += 40;
+		y += spacing;
 		continueButton = new TextButton(0, 0, Globals.TEXT_CONTINUE,
 			Globals.FONT_N, clickContinue);
 		continueButton.hoverColor = KColor.BURGUNDY;
 		continueButton.clickColor = KColor.BURGUNDY;
 		continueButton.screenCenter();
 		continueButton.y += y;
-		y += 40;
+		y += spacing;
 		optionsButton = new TextButton(0, 0, Globals.TEXT_OPTIONS,
 			Globals.FONT_N, clickOptions);
 		optionsButton.hoverColor = KColor.BURGUNDY;
 		optionsButton.clickColor = KColor.BURGUNDY;
 		optionsButton.screenCenter();
 		optionsButton.y += y;
-		y += 40;
+		y += spacing;
 		creditsButton = new TextButton(0, 0, Globals.TEXT_CREDITS,
 			Globals.FONT_N, clickCredits);
 		creditsButton.hoverColor = KColor.BURGUNDY;
 		creditsButton.clickColor = KColor.BURGUNDY;
 		creditsButton.screenCenter();
 		creditsButton.y += y;
-		y += 40;
+		y += spacing;
 		#if desktop
 		exitButton = new TextButton(0, 0, Globals.TEXT_EXIT, Globals.FONT_N,
 			clickExit);
@@ -182,7 +183,7 @@ class TitleState extends FlxState {
 	public function createControls() {
 		var textWidth = 200;
 		var textSize = 12;
-		var controlsText = new FlxText(20, FlxG.height - 100, textWidth,
+		var controlsText = new FlxText(20, FlxG.height - 20, textWidth,
 			'How To Move:
 UP: W/UP
 Left/Right: A/Left, S/Right', textSize);
@@ -193,7 +194,7 @@ Left/Right: A/Left, S/Right', textSize);
 		var textWidth = 200;
 		var textSize = 12;
 		var creditsText = new FlxText(FlxG.width - textWidth,
-			FlxG.height - 100, textWidth, 'Created by KinoCreates', textSize);
+			FlxG.height - 20, textWidth, 'Created by KinoCreates', textSize);
 		add(creditsText);
 	}
 
@@ -201,7 +202,7 @@ Left/Right: A/Left, S/Right', textSize);
 		var textWidth = 200;
 		var textSize = 12;
 		var versionText = new FlxText(FlxG.width - textWidth,
-			FlxG.height - 100, textWidth, Globals.TEXT_VERSION, textSize);
+			FlxG.height - 20, textWidth, Globals.TEXT_VERSION, textSize);
 		versionText.screenCenter(FlxAxes.X);
 		add(versionText);
 	}

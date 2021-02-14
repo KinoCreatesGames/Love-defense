@@ -12,6 +12,7 @@ import flixel.util.FlxColor;
 import flixel.util.FlxSave;
 import game.ext.KColor;
 import states.*;
+import game.char.*;
 import game.GameTypes;
 
 using Lambda;

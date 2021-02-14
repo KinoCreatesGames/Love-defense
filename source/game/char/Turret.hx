@@ -9,6 +9,7 @@ class Turret extends Actor {
 
 	override public function assignStats() {
 		super.assignStats();
-		atkSpd = cast(data, TurretData).atkSpd;
+		var turretData:TurretData = cast data;
+		atkSpd = turretData.atkSpd;
 	}
 }
