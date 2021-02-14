@@ -1,5 +1,6 @@
 package game.states;
 
+import game.ui.PlayerHUD;
 import flixel.FlxObject;
 import flixel.tile.FlxBaseTilemap.FlxTilemapAutoTiling;
 import flixel.tile.FlxTilemap;
@@ -29,6 +30,9 @@ class LevelState extends FlxState {
 
 	public var map:TiledMap;
 
+	public var hud:PlayerHUD;
+
+	// Groups
 	public var playerTurrets:FlxTypedGroup<Turret>;
 	public var turretPositions:FlxTypedGroup<FlxSprite>;
 	public var enemySpawnPositions:FlxTypedGroup<FlxSprite>;
@@ -37,6 +41,8 @@ class LevelState extends FlxState {
 	public var enemyGrp:FlxTypedGroup<Enemy>;
 	public var playerBullets:FlxTypedGroup<Bullet>;
 
+	public static inline var TILESET_NAME:String = 'Floor_tileset';
+
 	override public function create() {
 		super.create();
 		completeLevel = false;
@@ -44,7 +50,6 @@ class LevelState extends FlxState {
 		levelScore = 0;
 		setSetupTime();
 		setLevelTime();
-		createLevel();
 	}
 
 	/**
@@ -78,18 +83,21 @@ class LevelState extends FlxState {
 
 		// Add Level
 		createLevelMap(tileLayer);
+		createHeart();
 		// Add Groups
+		hud = new PlayerHUD(heart);
 		add(levelGrp);
 		add(turretPositions);
 		add(enemySpawnPositions);
 		add(enemyGrp);
 		add(playerTurrets);
 		add(playerBullets);
+		add(hud);
 	}
 
 	public function createLevelMap(tileLayer:TiledTileLayer) {
 		// Gets Tiled Image Data
-		var tileset:TiledTileSet = map.getTileSet('floor-tileset');
+		var tileset:TiledTileSet = map.getTileSet(TILESET_NAME);
 		var tilesetPath = AssetPaths.floor_tileset__png;
 
 		if (tileLayer == null) {
@@ -110,7 +118,7 @@ class LevelState extends FlxState {
 	}
 
 	public function createDecorationLayers() {
-		var tileset:TiledTileSet = map.getTileSet('Dungeon_tiles');
+		var tileset:TiledTileSet = map.getTileSet(TILESET_NAME);
 		// This works because it has an ID given by Flixel
 		var tilesetPath = AssetPaths.floor_tileset__png;
 		var decorLayerPrefix = 'Decor_';
@@ -133,6 +141,12 @@ class LevelState extends FlxState {
 	public function createLevelLayers() {}
 
 	public function createTurretPositions() {}
+
+	public function createHeart() {
+		heart = new FlxSprite(0, 0);
+		heart.makeGraphic(16, 16, KColor.RED);
+		add(heart);
+	}
 
 	override public function update(elapsed:Float) {
 		super.update(elapsed);
@@ -170,6 +184,7 @@ class LevelState extends FlxState {
 	public function processLevel(elapsed:Float) {
 		if (setupTime >= 0) {
 			setupTime -= elapsed;
+			hud.setTimer(setupTime);
 		} else if (setupTime <= 0) {
 			// Start Level Time
 			if (levelTime <= 0 && heart.alive) {
@@ -178,6 +193,7 @@ class LevelState extends FlxState {
 			} else {
 				levelTime -= elapsed;
 			}
+			hud.setTimer(levelTime);
 		}
 
 		if (!heart.alive) {

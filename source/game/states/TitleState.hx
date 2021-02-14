@@ -160,6 +160,7 @@ class TitleState extends FlxState {
 		// 	el.name == 'Intro');
 		// FlxG.switchState(new CutsceneState(new HubState(),
 		// 	introText.cutsceneText));
+		FlxG.switchState(new LevelOneState());
 	}
 
 	public function clickContinue() {
