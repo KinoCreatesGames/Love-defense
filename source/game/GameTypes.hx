@@ -11,11 +11,12 @@ typedef ActorData = {
 typedef TurretData = {
 	> ActorData,
 	public var atkSpd:Int;
+	public var range:Float;
 }
 
 typedef MonsterData = {
 	> ActorData,
-	public var patrol:Array<FlxPoint>;
+	// public var patrol:Array<FlxPoint>;
 }
 
 typedef SceneText = {

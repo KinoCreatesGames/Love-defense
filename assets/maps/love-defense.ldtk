@@ -14,7 +14,7 @@
 	"defaultGridSize": 16,
 	"bgColor": "#676877",
 	"defaultLevelBgColor": "#7F8093",
-	"nextUid": 5,
+	"nextUid": 13,
 	"minifyJson": false,
 	"externalLevels": false,
 	"exportTiled": true,
@@ -27,6 +27,40 @@
 	"worldGridHeight": 256,
 	"defs": {
 		"layers": [
+			{
+				"__type": "Entities",
+				"identifier": "DamageArea",
+				"type": "Entities",
+				"uid": 12,
+				"gridSize": 16,
+				"displayOpacity": 1,
+				"pxOffsetX": 0,
+				"pxOffsetY": 0,
+				"intGridValues": [{ "identifier": null, "color": "#000000" }],
+				"autoTilesetDefUid": null,
+				"autoRuleGroups": [],
+				"autoSourceLayerDefUid": null,
+				"tilesetDefUid": null,
+				"tilePivotX": 0,
+				"tilePivotY": 0
+			},
+			{
+				"__type": "Entities",
+				"identifier": "HeartPosition",
+				"type": "Entities",
+				"uid": 11,
+				"gridSize": 16,
+				"displayOpacity": 1,
+				"pxOffsetX": 0,
+				"pxOffsetY": 0,
+				"intGridValues": [{ "identifier": null, "color": "#000000" }],
+				"autoTilesetDefUid": null,
+				"autoRuleGroups": [],
+				"autoSourceLayerDefUid": null,
+				"tilesetDefUid": null,
+				"tilePivotX": 0,
+				"tilePivotY": 0
+			},
 			{
 				"__type": "Entities",
 				"identifier": "EnemyPositions",
@@ -63,6 +97,23 @@
 			},
 			{
 				"__type": "Tiles",
+				"identifier": "Decoration",
+				"type": "Tiles",
+				"uid": 5,
+				"gridSize": 16,
+				"displayOpacity": 1,
+				"pxOffsetX": 0,
+				"pxOffsetY": 0,
+				"intGridValues": [{ "identifier": null, "color": "#000000" }],
+				"autoTilesetDefUid": null,
+				"autoRuleGroups": [],
+				"autoSourceLayerDefUid": null,
+				"tilesetDefUid": 4,
+				"tilePivotX": 0,
+				"tilePivotY": 0
+			},
+			{
+				"__type": "Tiles",
 				"identifier": "Level",
 				"type": "Tiles",
 				"uid": 1,
@@ -79,7 +130,95 @@
 				"tilePivotY": 0
 			}
 		],
-		"entities": [],
+		"entities": [
+			{
+				"identifier": "Turret",
+				"uid": 6,
+				"width": 16,
+				"height": 16,
+				"color": "#00EEFF",
+				"renderMode": "Rectangle",
+				"showName": true,
+				"tilesetId": null,
+				"tileId": null,
+				"tileRenderMode": "Stretch",
+				"maxPerLevel": 0,
+				"limitBehavior": "DiscardOldOnes",
+				"pivotX": 0,
+				"pivotY": 0,
+				"fieldDefs": []
+			},
+			{
+				"identifier": "SpawnPoint",
+				"uid": 7,
+				"width": 16,
+				"height": 16,
+				"color": "#D900FF",
+				"renderMode": "Rectangle",
+				"showName": true,
+				"tilesetId": null,
+				"tileId": null,
+				"tileRenderMode": "Stretch",
+				"maxPerLevel": 0,
+				"limitBehavior": "DiscardOldOnes",
+				"pivotX": 0,
+				"pivotY": 0,
+				"fieldDefs": [
+					{
+						"identifier": "Path",
+						"__type": "Array<Point>",
+						"uid": 8,
+						"type": "F_Point",
+						"isArray": true,
+						"canBeNull": true,
+						"arrayMinLength": null,
+						"arrayMaxLength": null,
+						"editorDisplayMode": "PointPath",
+						"editorDisplayPos": "Above",
+						"editorAlwaysShow": false,
+						"min": null,
+						"max": null,
+						"regex": null,
+						"acceptFileTypes": null,
+						"defaultOverride": null
+					}
+				]
+			},
+			{
+				"identifier": "Heart",
+				"uid": 9,
+				"width": 16,
+				"height": 16,
+				"color": "#FF0023",
+				"renderMode": "Rectangle",
+				"showName": true,
+				"tilesetId": null,
+				"tileId": null,
+				"tileRenderMode": "Stretch",
+				"maxPerLevel": 0,
+				"limitBehavior": "DiscardOldOnes",
+				"pivotX": 0,
+				"pivotY": 0,
+				"fieldDefs": []
+			},
+			{
+				"identifier": "DamageArea",
+				"uid": 10,
+				"width": 16,
+				"height": 16,
+				"color": "#FF8300",
+				"renderMode": "Rectangle",
+				"showName": true,
+				"tilesetId": null,
+				"tileId": null,
+				"tileRenderMode": "Stretch",
+				"maxPerLevel": 0,
+				"limitBehavior": "DiscardOldOnes",
+				"pivotX": 0,
+				"pivotY": 0,
+				"fieldDefs": []
+			}
+		],
 		"tilesets": [
 			{
 				"identifier": "Floor_tileset",
@@ -118,6 +257,57 @@
 			"externalRelPath": null,
 			"layerInstances": [
 				{
+					"__identifier": "DamageArea",
+					"__type": "Entities",
+					"__cWid": 30,
+					"__cHei": 17,
+					"__gridSize": 16,
+					"__opacity": 1,
+					"__pxTotalOffsetX": 0,
+					"__pxTotalOffsetY": 0,
+					"__tilesetDefUid": null,
+					"__tilesetRelPath": null,
+					"levelId": 0,
+					"layerDefUid": 12,
+					"pxOffsetX": 0,
+					"pxOffsetY": 0,
+					"intGrid": [],
+					"autoLayerTiles": [],
+					"seed": 9587597,
+					"gridTiles": [],
+					"entityInstances": [
+						{ "__identifier": "DamageArea", "__grid": [0,7], "__pivot": [0,0], "__tile": null, "defUid": 10, "px": [0,112], "fieldInstances": [] },
+						{ "__identifier": "DamageArea", "__grid": [1,7], "__pivot": [0,0], "__tile": null, "defUid": 10, "px": [16,112], "fieldInstances": [] },
+						{ "__identifier": "DamageArea", "__grid": [2,8], "__pivot": [0,0], "__tile": null, "defUid": 10, "px": [32,128], "fieldInstances": [] },
+						{ "__identifier": "DamageArea", "__grid": [2,11], "__pivot": [0,0], "__tile": null, "defUid": 10, "px": [32,176], "fieldInstances": [] },
+						{ "__identifier": "DamageArea", "__grid": [1,12], "__pivot": [0,0], "__tile": null, "defUid": 10, "px": [16,192], "fieldInstances": [] },
+						{ "__identifier": "DamageArea", "__grid": [0,12], "__pivot": [0,0], "__tile": null, "defUid": 10, "px": [0,192], "fieldInstances": [] },
+						{ "__identifier": "DamageArea", "__grid": [2,10], "__pivot": [0,0], "__tile": null, "defUid": 10, "px": [32,160], "fieldInstances": [] },
+						{ "__identifier": "DamageArea", "__grid": [2,9], "__pivot": [0,0], "__tile": null, "defUid": 10, "px": [32,144], "fieldInstances": [] }
+					]
+				},
+				{
+					"__identifier": "HeartPosition",
+					"__type": "Entities",
+					"__cWid": 30,
+					"__cHei": 17,
+					"__gridSize": 16,
+					"__opacity": 1,
+					"__pxTotalOffsetX": 0,
+					"__pxTotalOffsetY": 0,
+					"__tilesetDefUid": null,
+					"__tilesetRelPath": null,
+					"levelId": 0,
+					"layerDefUid": 11,
+					"pxOffsetX": 0,
+					"pxOffsetY": 0,
+					"intGrid": [],
+					"autoLayerTiles": [],
+					"seed": 4910557,
+					"gridTiles": [],
+					"entityInstances": [{ "__identifier": "Heart", "__grid": [0,9], "__pivot": [0,0], "__tile": null, "defUid": 9, "px": [0,144], "fieldInstances": [] }]
+				},
+				{
 					"__identifier": "EnemyPositions",
 					"__type": "Entities",
 					"__cWid": 30,
@@ -136,7 +326,34 @@
 					"autoLayerTiles": [],
 					"seed": 5801679,
 					"gridTiles": [],
-					"entityInstances": []
+					"entityInstances": [
+						{ "__identifier": "SpawnPoint", "__grid": [29,7], "__pivot": [0,0], "__tile": null, "defUid": 7, "px": [464,112], "fieldInstances": [{
+							"__identifier": "Path",
+							"__value": [ { "cx": 29, "cy": 7 }, { "cx": 1, "cy": 7 } ],
+							"__type": "Array<Point>",
+							"defUid": 8,
+							"realEditorValues": [ {
+								"id": "V_String",
+								"params": ["29,7"]
+							}, {
+								"id": "V_String",
+								"params": ["1,7"]
+							} ]
+						}] },
+						{ "__identifier": "SpawnPoint", "__grid": [29,12], "__pivot": [0,0], "__tile": null, "defUid": 7, "px": [464,192], "fieldInstances": [{
+							"__identifier": "Path",
+							"__value": [ { "cx": 29, "cy": 12 }, { "cx": 1, "cy": 12 } ],
+							"__type": "Array<Point>",
+							"defUid": 8,
+							"realEditorValues": [ {
+								"id": "V_String",
+								"params": ["29,12"]
+							}, {
+								"id": "V_String",
+								"params": ["1,12"]
+							} ]
+						}] }
+					]
 				},
 				{
 					"__identifier": "TurretPositions",
@@ -157,6 +374,61 @@
 					"autoLayerTiles": [],
 					"seed": 6741350,
 					"gridTiles": [],
+					"entityInstances": [
+						{ "__identifier": "Turret", "__grid": [1,6], "__pivot": [0,0], "__tile": null, "defUid": 6, "px": [16,96], "fieldInstances": [] },
+						{ "__identifier": "Turret", "__grid": [3,8], "__pivot": [0,0], "__tile": null, "defUid": 6, "px": [48,128], "fieldInstances": [] },
+						{ "__identifier": "Turret", "__grid": [3,11], "__pivot": [0,0], "__tile": null, "defUid": 6, "px": [48,176], "fieldInstances": [] },
+						{ "__identifier": "Turret", "__grid": [1,13], "__pivot": [0,0], "__tile": null, "defUid": 6, "px": [16,208], "fieldInstances": [] },
+						{ "__identifier": "Turret", "__grid": [13,5], "__pivot": [0,0], "__tile": null, "defUid": 6, "px": [208,80], "fieldInstances": [] },
+						{ "__identifier": "Turret", "__grid": [13,8], "__pivot": [0,0], "__tile": null, "defUid": 6, "px": [208,128], "fieldInstances": [] },
+						{ "__identifier": "Turret", "__grid": [13,11], "__pivot": [0,0], "__tile": null, "defUid": 6, "px": [208,176], "fieldInstances": [] },
+						{ "__identifier": "Turret", "__grid": [13,14], "__pivot": [0,0], "__tile": null, "defUid": 6, "px": [208,224], "fieldInstances": [] },
+						{ "__identifier": "Turret", "__grid": [18,13], "__pivot": [0,0], "__tile": null, "defUid": 6, "px": [288,208], "fieldInstances": [] },
+						{ "__identifier": "Turret", "__grid": [18,6], "__pivot": [0,0], "__tile": null, "defUid": 6, "px": [288,96], "fieldInstances": [] },
+						{ "__identifier": "Turret", "__grid": [21,9], "__pivot": [0,0], "__tile": null, "defUid": 6, "px": [336,144], "fieldInstances": [] },
+						{ "__identifier": "Turret", "__grid": [21,10], "__pivot": [0,0], "__tile": null, "defUid": 6, "px": [336,160], "fieldInstances": [] },
+						{ "__identifier": "Turret", "__grid": [25,8], "__pivot": [0,0], "__tile": null, "defUid": 6, "px": [400,128], "fieldInstances": [] },
+						{ "__identifier": "Turret", "__grid": [27,6], "__pivot": [0,0], "__tile": null, "defUid": 6, "px": [432,96], "fieldInstances": [] },
+						{ "__identifier": "Turret", "__grid": [25,11], "__pivot": [0,0], "__tile": null, "defUid": 6, "px": [400,176], "fieldInstances": [] },
+						{ "__identifier": "Turret", "__grid": [27,13], "__pivot": [0,0], "__tile": null, "defUid": 6, "px": [432,208], "fieldInstances": [] }
+					]
+				},
+				{
+					"__identifier": "Decoration",
+					"__type": "Tiles",
+					"__cWid": 30,
+					"__cHei": 17,
+					"__gridSize": 16,
+					"__opacity": 1,
+					"__pxTotalOffsetX": 0,
+					"__pxTotalOffsetY": 0,
+					"__tilesetDefUid": 4,
+					"__tilesetRelPath": "../images/floor-tileset.png",
+					"levelId": 0,
+					"layerDefUid": 5,
+					"pxOffsetX": 0,
+					"pxOffsetY": 0,
+					"intGrid": [],
+					"autoLayerTiles": [],
+					"seed": 9537753,
+					"gridTiles": [
+						{ "px": [208,80], "src": [32,32], "f": 0, "t": 10, "d": [163] },
+						{ "px": [16,96], "src": [32,32], "f": 0, "t": 10, "d": [181] },
+						{ "px": [288,96], "src": [32,32], "f": 0, "t": 10, "d": [198] },
+						{ "px": [432,96], "src": [32,32], "f": 0, "t": 10, "d": [207] },
+						{ "px": [48,128], "src": [32,32], "f": 0, "t": 10, "d": [243] },
+						{ "px": [208,128], "src": [32,32], "f": 0, "t": 10, "d": [253] },
+						{ "px": [400,128], "src": [32,32], "f": 0, "t": 10, "d": [265] },
+						{ "px": [336,144], "src": [32,32], "f": 0, "t": 10, "d": [291] },
+						{ "px": [336,160], "src": [32,32], "f": 0, "t": 10, "d": [321] },
+						{ "px": [48,176], "src": [32,32], "f": 0, "t": 10, "d": [333] },
+						{ "px": [208,176], "src": [32,32], "f": 0, "t": 10, "d": [343] },
+						{ "px": [400,176], "src": [32,32], "f": 0, "t": 10, "d": [355] },
+						{ "px": [16,208], "src": [32,32], "f": 0, "t": 10, "d": [391] },
+						{ "px": [288,208], "src": [32,32], "f": 0, "t": 10, "d": [408] },
+						{ "px": [432,208], "src": [32,32], "f": 0, "t": 10, "d": [417] },
+						{ "px": [208,224], "src": [32,32], "f": 0, "t": 10, "d": [433] }
+					],
 					"entityInstances": []
 				},
 				{

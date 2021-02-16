@@ -1,5 +1,6 @@
 package game.states;
 
+import flixel.addons.editors.tiled.TiledObject;
 import game.ui.PlayerHUD;
 import flixel.FlxObject;
 import flixel.tile.FlxBaseTilemap.FlxTilemapAutoTiling;
@@ -34,6 +35,7 @@ class LevelState extends FlxState {
 
 	// Groups
 	public var playerTurrets:FlxTypedGroup<Turret>;
+	public var playerDamageGrp:FlxTypedGroup<FlxSprite>;
 	public var turretPositions:FlxTypedGroup<FlxSprite>;
 	public var enemySpawnPositions:FlxTypedGroup<FlxSprite>;
 	public var levelGrp:FlxTypedGroup<FlxTilemap>;
@@ -71,25 +73,36 @@ class LevelState extends FlxState {
 		this.map = map;
 		final turretPositionLayer:TiledObjectLayer = cast(map.getLayer('TurretPositions'));
 		final enemySpawnPositionLayer:TiledObjectLayer = cast(map.getLayer('EnemyPositions'));
+		// Position of the heart on screen
+		final heartPositionLayer:TiledObjectLayer = cast(map.getLayer('HeartPosition'));
+		// Damage Area for the heart in the game
+		final damageAreaLayer:TiledObjectLayer = cast(map.getLayer('DamageArea'));
 		final tileLayer:TiledTileLayer = cast(map.getLayer('Level'));
 
 		// Create Groups And Level
 		playerTurrets = new FlxTypedGroup<Turret>();
 		playerBullets = new FlxTypedGroup<Bullet>();
+		playerDamageGrp = new FlxTypedGroup<FlxSprite>();
 		turretPositions = new FlxTypedGroup<FlxSprite>();
 		enemySpawnPositions = new FlxTypedGroup<FlxSprite>();
 		enemyGrp = new FlxTypedGroup<Enemy>();
 		levelGrp = new FlxTypedGroup<FlxTilemap>();
+		decorationGrp = new FlxTypedGroup<FlxTilemap>();
 
-		// Add Level
+		// Add Level Information
 		createLevelMap(tileLayer);
-		createHeart();
+		createTurretPositions(turretPositionLayer);
+		createEnemySpawns(enemySpawnPositionLayer);
+		createHeart(heartPositionLayer);
+		createDamageArea(damageAreaLayer);
 		// Add Groups
 		hud = new PlayerHUD(heart);
 		add(levelGrp);
+		add(decorationGrp);
 		add(turretPositions);
 		add(enemySpawnPositions);
 		add(enemyGrp);
+		add(playerDamageGrp);
 		add(playerTurrets);
 		add(playerBullets);
 		add(hud);
@@ -106,6 +119,7 @@ class LevelState extends FlxState {
 		} else {
 			addLevelToGrp(tileLayer, tilesetPath, tileset);
 		}
+		createDecorationLayers();
 	}
 
 	public function addLevelToGrp(tileLayer:TiledTileLayer,
@@ -121,31 +135,64 @@ class LevelState extends FlxState {
 		var tileset:TiledTileSet = map.getTileSet(TILESET_NAME);
 		// This works because it has an ID given by Flixel
 		var tilesetPath = AssetPaths.floor_tileset__png;
-		var decorLayerPrefix = 'Decor_';
-		trace(map.layers.length);
-		for (i in 0...map.layers.length) {
-			var tileLayer:TiledTileLayer = cast(map.getLayer(decorLayerPrefix
-				+ i));
+		final tileLayer:TiledTileLayer = cast(map.getLayer('Decoration'));
 
-			if (tileLayer != null) {
-				final levelDecoration = new FlxTilemap();
-				levelDecoration.loadMapFromArray(tileLayer.tileArray,
-					map.width, map.height, tilesetPath, map.tileWidth,
-					map.tileHeight, FlxTilemapAutoTiling.OFF,
-					tileset.firstGID, 1, FlxObject.NONE);
-				decorationGrp.add(levelDecoration);
-			}
-		};
+		if (tileLayer != null) {
+			final levelDecoration = new FlxTilemap();
+			levelDecoration.loadMapFromArray(tileLayer.tileArray, map.width,
+				map.height, tilesetPath, map.tileWidth, map.tileHeight,
+				FlxTilemapAutoTiling.OFF, tileset.firstGID, 1, FlxObject.NONE);
+			decorationGrp.add(levelDecoration);
+		}
+		// };
 	}
 
-	public function createLevelLayers() {}
+	public function createTurretPositions(layer:TiledObjectLayer) {
+		layer.objects.iter((tObj) -> {
+			var sprite = new FlxSprite(tObj.x, tObj.y);
+			sprite.makeGraphic(16, 16, 0x55FFFFFF);
+			turretPositions.add(sprite);
+		});
+	}
 
-	public function createTurretPositions() {}
+	public function createEnemySpawns(layer:TiledObjectLayer) {
+		layer.objects.iter((tObj) -> {
+			var pathPrefix = 'Path_';
+			var pathPoints = [];
+			// Path Keys
 
-	public function createHeart() {
-		heart = new FlxSprite(0, 0);
-		heart.makeGraphic(16, 16, KColor.RED);
-		add(heart);
+			for (key in tObj.properties.keysIterator()) {
+				if (key.contains(pathPrefix)) {
+					var point = tObj.properties.get(key)
+						.split(",")
+						.map(Std.parseFloat)
+						.map(f -> (f + 1) * map.tileWidth);
+					pathPoints.push(new FlxPoint(point[0], point[1]));
+				}
+			}
+
+			var sprite = new SpawnPoint(tObj.x, tObj.y, enemyGrp, pathPoints);
+
+			enemySpawnPositions.add(sprite);
+		});
+	}
+
+	public function createDamageArea(layer:TiledObjectLayer) {
+		layer.objects.iter((tObj) -> {
+			var sprite = new FlxSprite(tObj.x, tObj.y);
+			sprite.makeGraphic(16, 16, KColor.TRANSPARENT);
+			playerDamageGrp.add(sprite);
+		});
+	}
+
+	public function createHeart(layer:TiledObjectLayer) {
+		layer.objects.iter((tObj) -> {
+			heart = new FlxSprite(tObj.x, tObj.y);
+			heart.makeGraphic(16, 16, KColor.RED);
+			// Set Health to 100
+			heart.health = 100;
+			playerDamageGrp.add(heart);
+		});
 	}
 
 	override public function update(elapsed:Float) {
@@ -163,12 +210,15 @@ class LevelState extends FlxState {
 	}
 
 	public function processCollisions() {
-		FlxG.overlap(enemyGrp, heart, enemyTouchHeart);
+		FlxG.overlap(enemyGrp, playerDamageGrp, enemyTouchDamageArea);
 	}
 
-	public function enemyTouchHeart(enemy:Enemy, heart:FlxSprite) {
+	public function enemyTouchDamageArea(enemy:Enemy, damageArea:FlxSprite) {
+		trace('Touch Heart');
 		heart.health -= enemy.atk;
 		enemy.kill();
+		trace(heart.health);
+		trace(enemy.atk);
 		if (heart.health <= 0) {
 			heart.kill();
 		}

@@ -5,6 +5,8 @@ class PlayerHUD extends FlxTypedGroup<FlxSprite> {
 	public var timerText:FlxText;
 	public var score:Float;
 	public var scoreText:FlxText;
+	public var turretPoints:Int;
+	public var turretPointsText:FlxText;
 	public var heartHealthBar:FlxBar;
 	public var heart:FlxSprite;
 
@@ -17,6 +19,7 @@ class PlayerHUD extends FlxTypedGroup<FlxSprite> {
 	public function create() {
 		createTimer();
 		createHeartHealth();
+		createTurretPoints();
 		createScore();
 	}
 
@@ -38,6 +41,15 @@ class PlayerHUD extends FlxTypedGroup<FlxSprite> {
 		add(heartHealthBar);
 	}
 
+	public function createTurretPoints() {
+		var padding = 12;
+		turretPoints = 0;
+		turretPointsText = new FlxText(padding,
+			heartHealthBar.y + heartHealthBar.height + padding, -1,
+			'TPoints  0', Globals.FONT_N);
+		add(turretPointsText);
+	}
+
 	public function createScore() {
 		var padding = 12;
 		score = 0;
@@ -47,10 +59,6 @@ class PlayerHUD extends FlxTypedGroup<FlxSprite> {
 		add(scoreText);
 	}
 
-	override public function update(elapsed:Float) {
-		super.update(elapsed);
-	}
-
 	public function setTimer(time:Float) {
 		timer = time;
 		updateTimer();
@@ -58,6 +66,15 @@ class PlayerHUD extends FlxTypedGroup<FlxSprite> {
 
 	public function updateTimer() {
 		timerText.text = 'Time  ${Math.ceil(timer)}';
+	}
+
+	public function setTurretPoints(value:Int) {
+		turretPoints = value;
+		updateTurretPoints();
+	}
+
+	public function updateTurretPoints() {
+		turretPointsText.text = 'TPoints  ${turretPoints}';
 	}
 
 	public function setScore(value:Float) {
