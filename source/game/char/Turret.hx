@@ -56,7 +56,7 @@ class Turret extends Actor {
 
 	/**
 	 * Fires at the enemy using the acceleration 
-	 * in their direction
+	 * in their direction.
 	 */
 	public function fireAtEnemy() {
 		var enemy = enemyInRange();

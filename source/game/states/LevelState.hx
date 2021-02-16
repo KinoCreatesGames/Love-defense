@@ -251,6 +251,8 @@ class LevelState extends FlxState {
 			hud.setTimer(setupTime);
 		} else if (setupTime <= 0) {
 			// Start Level Time & Spawners
+			hud.setStateText(Globals.TEXT_START_GAME);
+			hud.stateText.fadeOut(2);
 			startSpawners();
 			if (levelTime <= 0 && heart.alive) {
 				// complete level

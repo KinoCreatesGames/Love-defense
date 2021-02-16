@@ -17,6 +17,8 @@ class Globals {
 	public static inline var TEXT_VERSION = 'Version: 0.0.1';
 	public static inline var TEXT_CREDITS = 'Credits';
 	public static inline var TIME_BONUS:Int = 100;
+	public static inline var TEXT_SETUP_GAME:String = 'Set up time!!';
+	public static inline var TEXT_START_GAME:String = 'Start!!';
 	public static inline var CMD_TIME_SCALE = 0.015;
 
 	// Player Globals
