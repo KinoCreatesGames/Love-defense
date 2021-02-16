@@ -37,7 +37,7 @@ class LevelState extends FlxState {
 	public var playerTurrets:FlxTypedGroup<Turret>;
 	public var playerDamageGrp:FlxTypedGroup<FlxSprite>;
 	public var turretPositions:FlxTypedGroup<FlxSprite>;
-	public var enemySpawnPositions:FlxTypedGroup<FlxSprite>;
+	public var enemySpawnPositions:FlxTypedGroup<SpawnPoint>;
 	public var levelGrp:FlxTypedGroup<FlxTilemap>;
 	public var decorationGrp:FlxTypedGroup<FlxTilemap>;
 	public var enemyGrp:FlxTypedGroup<Enemy>;
@@ -52,6 +52,7 @@ class LevelState extends FlxState {
 		levelScore = 0;
 		setSetupTime();
 		setLevelTime();
+		setTurretPoints();
 	}
 
 	/**
@@ -66,6 +67,14 @@ class LevelState extends FlxState {
 	 */
 	public function setLevelTime() {
 		levelTime = 120.0;
+	}
+
+	/**
+	 * The amount of points you start with at the start of a stage
+	 * By default 400 Points.
+	 */
+	public function setTurretPoints() {
+		turretPoints = 400;
 	}
 
 	public function createLevel(?levelName:String) {
@@ -84,7 +93,7 @@ class LevelState extends FlxState {
 		playerBullets = new FlxTypedGroup<Bullet>();
 		playerDamageGrp = new FlxTypedGroup<FlxSprite>();
 		turretPositions = new FlxTypedGroup<FlxSprite>();
-		enemySpawnPositions = new FlxTypedGroup<FlxSprite>();
+		enemySpawnPositions = new FlxTypedGroup<SpawnPoint>();
 		enemyGrp = new FlxTypedGroup<Enemy>();
 		levelGrp = new FlxTypedGroup<FlxTilemap>();
 		decorationGrp = new FlxTypedGroup<FlxTilemap>();
@@ -211,6 +220,7 @@ class LevelState extends FlxState {
 
 	public function processCollisions() {
 		FlxG.overlap(enemyGrp, playerDamageGrp, enemyTouchDamageArea);
+		FlxG.overlap(playerBullets, enemyGrp, playerBulletTouchEnemy);
 	}
 
 	public function enemyTouchDamageArea(enemy:Enemy, damageArea:FlxSprite) {
@@ -240,10 +250,12 @@ class LevelState extends FlxState {
 			setupTime -= elapsed;
 			hud.setTimer(setupTime);
 		} else if (setupTime <= 0) {
-			// Start Level Time
+			// Start Level Time & Spawners
+			startSpawners();
 			if (levelTime <= 0 && heart.alive) {
 				// complete level
 				completeLevel = true;
+				stopSpawners();
 			} else {
 				levelTime -= elapsed;
 			}
@@ -253,5 +265,17 @@ class LevelState extends FlxState {
 		if (!heart.alive) {
 			gameOver = true;
 		}
+	}
+
+	public function startSpawners() {
+		enemySpawnPositions.members.iter((spawner) -> {
+			spawner.startSpawn();
+		});
+	}
+
+	public function stopSpawners() {
+		enemySpawnPositions.members.iter((spawner) -> {
+			spawner.stopSpawn();
+		});
 	}
 }
