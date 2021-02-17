@@ -216,6 +216,7 @@ class LevelState extends FlxState {
 		super.update(elapsed);
 		processPause();
 		processCollisions();
+		processUI(elapsed);
 		processLevel(elapsed);
 		processWin(elapsed);
 		processGameOver(elapsed);
@@ -251,6 +252,14 @@ class LevelState extends FlxState {
 
 		// Update Score
 		hud.setScore(levelScore);
+	}
+
+	public function processUI(elapsed:Float) {
+		if (FlxG.mouse.overlaps(turretPositions)) {
+			turretSelect.show();
+		} else {
+			turretSelect.hide();
+		}
 	}
 
 	public function processLevel(elapsed:Float) {
