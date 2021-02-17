@@ -228,7 +228,7 @@ class LevelState extends FlxState {
 	public function enemyTouchDamageArea(enemy:Enemy, damageArea:FlxSprite) {
 		heart.health -= enemy.atk;
 		enemy.kill();
-
+		FlxG.camera.shake(0.01, 0.1);
 		if (heart.health <= 0) {
 			heart.kill();
 		}
