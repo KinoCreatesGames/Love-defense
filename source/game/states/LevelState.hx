@@ -1,5 +1,6 @@
 package game.states;
 
+import game.ui.TurretSelect;
 import flixel.addons.editors.tiled.TiledObject;
 import game.ui.PlayerHUD;
 import flixel.FlxObject;
@@ -32,6 +33,7 @@ class LevelState extends FlxState {
 	public var map:TiledMap;
 
 	public var hud:PlayerHUD;
+	public var turretSelect:TurretSelect;
 
 	// Groups
 	public var playerTurrets:FlxTypedGroup<Turret>;
@@ -105,7 +107,7 @@ class LevelState extends FlxState {
 		createHeart(heartPositionLayer);
 		createDamageArea(damageAreaLayer);
 		// Add Groups
-		hud = new PlayerHUD(heart);
+		createUI();
 		add(levelGrp);
 		add(decorationGrp);
 		add(turretPositions);
@@ -115,6 +117,12 @@ class LevelState extends FlxState {
 		add(playerTurrets);
 		add(playerBullets);
 		add(hud);
+		add(turretSelect);
+	}
+
+	public function createUI() {
+		hud = new PlayerHUD(heart);
+		turretSelect = new TurretSelect(0, 210);
 	}
 
 	public function createLevelMap(tileLayer:TiledTileLayer) {
