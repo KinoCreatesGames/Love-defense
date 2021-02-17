@@ -15,4 +15,6 @@ abstract KColor(FlxColor) from FlxColor to FlxColor {
 	public static inline var RICH_BLACK_FORGRA_LOW = 0xF00F0E0E;
 	public static inline var DARK_BYZANTIUM = 0xFF522B47;
 	public static inline var MORNING_BLUE = 0xFF8DAA9D;
+	public static inline var PRETTY_PINK = 0xFFFF6B97;
+	public static inline var LIGHT_ORANGE = 0xFFFF9166;
 }

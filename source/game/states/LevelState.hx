@@ -209,6 +209,8 @@ class LevelState extends FlxState {
 		processPause();
 		processCollisions();
 		processLevel(elapsed);
+		processWin(elapsed);
+		processGameOver(elapsed);
 	}
 
 	public function processPause() {
@@ -224,11 +226,9 @@ class LevelState extends FlxState {
 	}
 
 	public function enemyTouchDamageArea(enemy:Enemy, damageArea:FlxSprite) {
-		trace('Touch Heart');
 		heart.health -= enemy.atk;
 		enemy.kill();
-		trace(heart.health);
-		trace(enemy.atk);
+
 		if (heart.health <= 0) {
 			heart.kill();
 		}
@@ -279,5 +279,18 @@ class LevelState extends FlxState {
 		enemySpawnPositions.members.iter((spawner) -> {
 			spawner.stopSpawn();
 		});
+	}
+
+	public function processWin(elapsed:Float) {
+		if (completeLevel) {
+			// TODO: Add dynamic timer before initiating congratulations
+			openSubState(new WinSubState());
+		}
+	}
+
+	public function processGameOver(elapsed:Float) {
+		if (gameOver) {
+			openSubState(new GameOverSubState());
+		}
 	}
 }
