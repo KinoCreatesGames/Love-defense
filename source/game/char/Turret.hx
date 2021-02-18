@@ -76,7 +76,6 @@ class Turret extends Actor {
 			bullet.velocity.set(0, 0);
 			FlxVelocity.accelerateTowardsObject(bullet, enemy,
 				PROJECTILE_SPEED, PROJECTILE_SPEED);
-
 			playerBullets.add(bullet);
 			fireCD = 0;
 		}
@@ -87,7 +86,7 @@ class Turret extends Actor {
 		if (enemyGrp != null) {
 			var enemyList = enemyGrp.members.filter((enemy) -> {
 				return enemy.getMidpoint()
-					.distanceTo(this.getMidpoint()) < range;
+					.distanceTo(this.getMidpoint()) < range && enemy.alive;
 			});
 			if (enemyList != null && enemyList.length > 0) {
 				enemy = enemyList.shift();
