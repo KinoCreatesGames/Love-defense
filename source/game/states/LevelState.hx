@@ -260,10 +260,10 @@ class LevelState extends FlxState {
 	}
 
 	public function playerBulletTouchEnemy(bullet:Bullet, enemy:Enemy) {
-		turretPoints += cast enemy.health * 2; // replace with cost on enemies
 		enemy.health -= bullet.atk;
 		bullet.kill();
 		if (enemy.health <= 0) {
+			turretPoints += enemy.points;
 			enemy.kill();
 			levelScore += 100;
 		}

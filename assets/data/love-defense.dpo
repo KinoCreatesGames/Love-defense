@@ -321,6 +321,23 @@
                         "max": "int",
                         "defaultValue": "int"
                     }
+                },
+                {
+                    "typeStr": "int",
+                    "guid": "cba5e8dc-ca15-4602-bc7d-75e61c6fdbf1",
+                    "description": "Number of points gained from killing an enemy",
+                    "name": "points",
+                    "min": -10000,
+                    "max": 100000,
+                    "defaultValue": 10,
+                    "iconName": "newInt",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "min": "int",
+                        "max": "int",
+                        "defaultValue": "int"
+                    }
                 }
             ],
             "lines": [
@@ -331,7 +348,8 @@
                     "atk": 3,
                     "def": 1,
                     "spd": 10,
-                    "health": 10
+                    "health": 10,
+                    "points": 10
                 }
             ],
             "hidden": false,

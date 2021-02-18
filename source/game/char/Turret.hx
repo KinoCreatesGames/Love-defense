@@ -74,6 +74,7 @@ class Turret extends Actor {
 			bullet.makeGraphic(4, 4, KColor.BEAU_BLUE);
 			bullet.setPosition(this.getMidpoint().x, y);
 			bullet.velocity.set(0, 0);
+			bullet.atk = atk;
 			FlxVelocity.accelerateTowardsObject(bullet, enemy,
 				PROJECTILE_SPEED, PROJECTILE_SPEED);
 			playerBullets.add(bullet);

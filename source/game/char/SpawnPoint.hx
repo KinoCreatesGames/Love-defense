@@ -37,13 +37,10 @@ class SpawnPoint extends FlxSprite {
 	public function spawnMonster() {
 		// Create Basic Grunt
 		var spawnPoint = new FlxPoint(x - 16, y);
-		var enemy = new Grunt(spawnPoint.x, spawnPoint.y, monsterPath, {
-			health: 3,
-			atk: 3,
-			def: 1,
-			name: 'Grunt',
-			spd: 200
-		});
+		var monsterData = DepotData.Enemies.lines.getByFn((line) ->
+			line.name == 'Grunt');
+		var enemy = new Grunt(spawnPoint.x, spawnPoint.y, monsterPath,
+			monsterData);
 		enemyGrp.add(enemy);
 	}
 
