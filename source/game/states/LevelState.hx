@@ -182,8 +182,7 @@ class LevelState extends FlxState {
 	public function createTurretPositions(layer:TiledObjectLayer) {
 		layer.objects.iter((tObj) -> {
 			var sprite = new FlxSprite(tObj.x, tObj.y);
-			// Debug purposes only
-			// sprite.makeGraphic(16, 16, 0x55FFFFFF);
+			sprite.makeGraphic(16, 16, KColor.TRANSPARENT, true);
 			turretPositions.add(sprite);
 		});
 	}
