@@ -30,13 +30,19 @@ class GameOverSubState extends FlxSubState {
 		background = new FlxSprite(width, height);
 		background.makeGraphic(cast width, cast height, KColor.TRANSPARENT);
 		background.screenCenter();
+		// Draw Border  +  Background
+		background.drawRect(0, 0, width, height, KColor.RICH_BLACK, {
+			thickness: 4,
+			color: KColor.WHITE
+		});
 		add(background);
 	}
 
 	public function createCongrats() {
 		gameOverText = new FlxText(background.x, background.y, -1,
 			Globals.TEXT_GAME_OVER, Globals.FONT_L);
-
+		gameOverText.screenCenterHorz();
+		gameOverText.y += 30;
 		initialPosition = gameOverText.y;
 		add(gameOverText);
 	}
@@ -54,6 +60,7 @@ class GameOverSubState extends FlxSubState {
 		x = background.x + (background.width - padding);
 		toTitleButton = new TextButton(cast x, cast y, 'To Title',
 			Globals.FONT_N, clickToTitle);
+		toTitleButton.x -= toTitleButton.width;
 
 		toTitleButton.hoverColor = KColor.PRETTY_PINK;
 		toTitleButton.clickColor = KColor.RICH_BLACK_FORGRA;
@@ -68,10 +75,7 @@ class GameOverSubState extends FlxSubState {
 
 	public function updateGameOver(elapsed:Float) {
 		timeCount += elapsed;
-		gameOverText.y = initialPosition + (30 * Math.sin(timeCount));
-		if (timeCount > 30) {
-			timeCount = 0;
-		}
+		gameOverText.y = initialPosition + (18 * Math.sin(timeCount));
 	}
 
 	public function clickContinue() {

@@ -29,6 +29,11 @@ class WinSubState extends FlxSubState {
 		var height = FlxG.height / 2;
 		background = new FlxSprite(width, height);
 		background.makeGraphic(cast width, cast height, KColor.TRANSPARENT);
+		// Draw Border  +  Background
+		background.drawRect(0, 0, width, height, KColor.RICH_BLACK, {
+			thickness: 4,
+			color: KColor.WHITE
+		});
 		background.screenCenter();
 		add(background);
 	}
@@ -36,7 +41,8 @@ class WinSubState extends FlxSubState {
 	public function createCongrats() {
 		congratsText = new FlxText(background.x, background.y, -1,
 			Globals.TEXT_CONGRATS, Globals.FONT_L);
-
+		congratsText.screenCenterHorz();
+		congratsText.y += 30;
 		initialPosition = congratsText.y;
 		add(congratsText);
 	}
@@ -54,6 +60,7 @@ class WinSubState extends FlxSubState {
 		x = background.x + (background.width - padding);
 		toTitleButton = new TextButton(cast x, cast y, 'To Title',
 			Globals.FONT_N, clickToTitle);
+		toTitleButton.x -= toTitleButton.width;
 
 		toTitleButton.hoverColor = KColor.PRETTY_PINK;
 		toTitleButton.clickColor = KColor.RICH_BLACK_FORGRA;
@@ -68,10 +75,7 @@ class WinSubState extends FlxSubState {
 
 	public function updateCongrats(elapsed:Float) {
 		timeCount += elapsed;
-		congratsText.y = initialPosition + (30 * Math.sin(timeCount));
-		if (timeCount > 30) {
-			timeCount = 0;
-		}
+		congratsText.y = initialPosition + (18 * Math.sin(timeCount));
 	}
 
 	public function clickContinue() {

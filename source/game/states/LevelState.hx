@@ -61,7 +61,7 @@ class LevelState extends FlxState {
 	 * By default 60 seconds
 	 */
 	public function setSetupTime() {
-		setupTime = 60.0;
+		setupTime = 1.0;
 	}
 
 	/**
@@ -130,8 +130,8 @@ class LevelState extends FlxState {
 	}
 
 	public function clickTurret(tSelect:TurretSelect, turretData:TurretData) {
-		if (turretPoints >= turretData.cost) {
-			var tPos = tSelect.currentTurretPosition;
+		var tPos = tSelect.currentTurretPosition;
+		if (turretPoints >= turretData.cost && !tPos.overlaps(playerTurrets)) {
 			var turret = new Turret(tPos.x, tPos.y, turretData, playerBullets);
 			turret.setEnemyGrp(enemyGrp);
 			playerTurrets.add(turret);

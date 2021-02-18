@@ -29,6 +29,7 @@ class Turret extends Actor {
 	override public function assignStats() {
 		super.assignStats();
 		var turretData:TurretData = cast data;
+		name = turretData.name;
 		atkSpd = turretData.atkSpd;
 		range = turretData.range;
 		cost = turretData.cost;
@@ -71,7 +72,7 @@ class Turret extends Actor {
 		var enemy = enemyInRange();
 		if (fireCD >= atkSpd) {
 			var bullet = playerBullets.recycle(Bullet);
-			bullet.makeGraphic(4, 4, KColor.BEAU_BLUE);
+			bullet.setBulletType(this.name);
 			bullet.setPosition(this.getMidpoint().x, y);
 			bullet.velocity.set(0, 0);
 			bullet.atk = atk;
