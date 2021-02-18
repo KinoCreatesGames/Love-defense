@@ -56,10 +56,10 @@ class Turret extends Actor {
 		var enemy = enemyInRange();
 		if (enemy != null) {
 			fireAtEnemy();
+			animation.play('fire');
 		} else {
 			ai.currentState = idle;
 		}
-		animation.play('fire');
 		handleCD(elapsed);
 	}
 

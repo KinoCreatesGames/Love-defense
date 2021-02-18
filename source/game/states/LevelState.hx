@@ -182,7 +182,8 @@ class LevelState extends FlxState {
 	public function createTurretPositions(layer:TiledObjectLayer) {
 		layer.objects.iter((tObj) -> {
 			var sprite = new FlxSprite(tObj.x, tObj.y);
-			sprite.makeGraphic(16, 16, 0x55FFFFFF);
+			// Debug purposes only
+			// sprite.makeGraphic(16, 16, 0x55FFFFFF);
 			turretPositions.add(sprite);
 		});
 	}
@@ -260,6 +261,7 @@ class LevelState extends FlxState {
 	}
 
 	public function playerBulletTouchEnemy(bullet:Bullet, enemy:Enemy) {
+		turretPoints += cast enemy.health * 2; // replace with cost on enemies
 		enemy.health -= bullet.atk;
 		if (enemy.health <= 0) {
 			enemy.kill();
