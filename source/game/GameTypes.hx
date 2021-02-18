@@ -10,8 +10,10 @@ typedef ActorData = {
 
 typedef TurretData = {
 	> ActorData,
-	public var atkSpd:Int;
+	public var atkSpd:Float;
 	public var range:Float;
+	public var cost:Int;
+	public var sprite:String;
 }
 
 typedef MonsterData = {

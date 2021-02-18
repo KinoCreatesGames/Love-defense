@@ -92,7 +92,7 @@ class LevelState extends FlxState {
 
 		// Create Groups And Level
 		playerTurrets = new FlxTypedGroup<Turret>();
-		playerBullets = new FlxTypedGroup<Bullet>();
+		playerBullets = new FlxTypedGroup<Bullet>(50);
 		playerDamageGrp = new FlxTypedGroup<FlxSprite>();
 		turretPositions = new FlxTypedGroup<FlxSprite>();
 		enemySpawnPositions = new FlxTypedGroup<SpawnPoint>();
@@ -122,7 +122,22 @@ class LevelState extends FlxState {
 
 	public function createUI() {
 		hud = new PlayerHUD(heart);
-		turretSelect = new TurretSelect(0, 210);
+		turretSelect = new TurretSelect(0, 210, playerTurrets);
+		var x = (FlxG.width / 2) - (TurretSelect.WIDTH / 2);
+		turretSelect.move(x, turretSelect.position.y);
+		turretSelect.clickTurret = clickTurret;
+		turretSelect.hide();
+	}
+
+	public function clickTurret(tSelect:TurretSelect, turretData:TurretData) {
+		if (turretPoints >= turretData.cost) {
+			var tPos = tSelect.currentTurretPosition;
+			var turret = new Turret(tPos.x, tPos.y, turretData, playerBullets);
+			turret.setEnemyGrp(enemyGrp);
+			playerTurrets.add(turret);
+			turretPoints -= turretData.cost;
+			turretSelect.hide();
+		}
 	}
 
 	public function createLevelMap(tileLayer:TiledTileLayer) {
@@ -220,6 +235,7 @@ class LevelState extends FlxState {
 		processLevel(elapsed);
 		processWin(elapsed);
 		processGameOver(elapsed);
+		hud.setTurretPoints(turretPoints);
 	}
 
 	public function processPause() {
@@ -250,15 +266,19 @@ class LevelState extends FlxState {
 			levelScore += 100;
 		}
 
-		// Update Score
+		// Update Score & Turret Points
 		hud.setScore(levelScore);
+		hud.setTurretPoints(turretPoints);
 	}
 
 	public function processUI(elapsed:Float) {
-		if (FlxG.mouse.overlaps(turretPositions)) {
-			turretSelect.show();
-		} else {
-			turretSelect.hide();
+		for (turretPosition in turretPositions.members) {
+			if (FlxG.mouse.overlaps(turretPosition) && FlxG.mouse.justPressed) {
+				turretSelect.currentTurretPosition = turretPosition;
+				turretSelect.show();
+			} else if (FlxG.keys.anyJustPressed([X])) {
+				turretSelect.hide();
+			}
 		}
 	}
 

@@ -1,16 +1,18 @@
 package game.char;
 
+import flixel.math.FlxVelocity;
 import flixel.math.FlxVector;
 
 class Turret extends Actor {
-	public var atkSpd:Int;
+	public var atkSpd:Float;
 	public var range:Float;
 	public var fireCD:Float;
+	public var cost:Int;
 	public var ai:State;
 	public var enemyGrp:FlxTypedGroup<Enemy>;
 	public var playerBullets:FlxTypedGroup<Bullet>;
 
-	public static inline var PROJECTILE_SPEED:Float = 400;
+	public static inline var PROJECTILE_SPEED:Float = 600;
 
 	public function new(x:Float, y:Float, turretData:TurretData,
 			bulletGrp:FlxTypedGroup<Bullet>) {
@@ -29,6 +31,11 @@ class Turret extends Actor {
 		var turretData:TurretData = cast data;
 		atkSpd = turretData.atkSpd;
 		range = turretData.range;
+		cost = turretData.cost;
+		var sprite = turretData.sprite.replace('../../', 'assets/');
+		loadGraphic(sprite, true, 16, 16, true);
+		animation.add('idle', [0]);
+		animation.add('fire', [0, 1, 2]);
 	}
 
 	override public function update(elapsed:Float) {
@@ -41,6 +48,7 @@ class Turret extends Actor {
 		if (enemy != null) {
 			ai.currentState = attackEnemy;
 		}
+		animation.play('idle');
 		handleCD(elapsed);
 	}
 
@@ -51,6 +59,7 @@ class Turret extends Actor {
 		} else {
 			ai.currentState = idle;
 		}
+		animation.play('fire');
 		handleCD(elapsed);
 	}
 
@@ -61,14 +70,14 @@ class Turret extends Actor {
 	public function fireAtEnemy() {
 		var enemy = enemyInRange();
 		if (fireCD >= atkSpd) {
-			var fireAngle = this.getMidpoint()
-				.angleBetween(enemy.getMidpoint());
 			var bullet = playerBullets.recycle(Bullet);
-			var fireVec:FlxVector = new FlxPoint(0, 0);
-			fireVec.rotateByDegrees(fireAngle);
-			fireVec.normalize();
-			bullet.acceleration.set(fireVec.x * PROJECTILE_SPEED,
-				fireVec.y * PROJECTILE_SPEED);
+			bullet.makeGraphic(4, 4, KColor.BEAU_BLUE);
+			bullet.setPosition(this.getMidpoint().x, y);
+			bullet.velocity.set(0, 0);
+			FlxVelocity.accelerateTowardsObject(bullet, enemy,
+				PROJECTILE_SPEED, PROJECTILE_SPEED);
+
+			playerBullets.add(bullet);
 			fireCD = 0;
 		}
 	}

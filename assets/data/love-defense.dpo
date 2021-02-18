@@ -133,6 +133,23 @@
                         "description": "text",
                         "defaultValue": "text"
                     }
+                },
+                {
+                    "typeStr": "int",
+                    "guid": "dd9fef40-70ef-4c85-b811-c94a46986fb1",
+                    "description": "Cost in turret points to place turret",
+                    "name": "cost",
+                    "min": -10000,
+                    "max": 100000,
+                    "defaultValue": 50,
+                    "iconName": "newInt",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "min": "int",
+                        "max": "int",
+                        "defaultValue": "int"
+                    }
                 }
             ],
             "lines": [
@@ -145,8 +162,9 @@
                     "def": 1,
                     "spd": 1,
                     "atkSpd": 1.5,
-                    "range": 50,
-                    "sprite": "../../images/love-turret.png"
+                    "range": 30,
+                    "sprite": "../../images/love-turret.png",
+                    "cost": 50
                 },
                 {
                     "guid": "5e83eafb-635c-46dc-ac1a-86bf9029d343",
@@ -158,7 +176,8 @@
                     "spd": 1,
                     "atkSpd": 1.5,
                     "range": 50,
-                    "sprite": ""
+                    "sprite": "",
+                    "cost": 50
                 },
                 {
                     "guid": "ac940f86-8e72-4420-9767-d9b41b8a9e7d",
@@ -170,7 +189,8 @@
                     "spd": 1,
                     "atkSpd": 1.5,
                     "range": 50,
-                    "sprite": ""
+                    "sprite": "",
+                    "cost": 50
                 },
                 {
                     "guid": "f8b57356-cb63-4cae-af98-16ca7908ccb4",
@@ -182,7 +202,8 @@
                     "spd": 1,
                     "atkSpd": 1.5,
                     "range": 50,
-                    "sprite": ""
+                    "sprite": "",
+                    "cost": 50
                 },
                 {
                     "guid": "653ec1b1-502e-4949-9e6d-153081f443d0",
@@ -194,7 +215,8 @@
                     "spd": 1,
                     "atkSpd": 1.5,
                     "range": 50,
-                    "sprite": ""
+                    "sprite": "",
+                    "cost": 50
                 }
             ],
             "hidden": false,

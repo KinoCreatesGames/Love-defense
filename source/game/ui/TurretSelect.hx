@@ -3,26 +3,35 @@ package game.ui;
 class TurretSelect extends FlxTypedGroup<FlxSprite> {
 	public var position:FlxPoint;
 	public var background:FlxSprite;
-	public var nameText:FlxText;
+	public var selectionRect:FlxSprite;
+	public var statText:FlxText;
 	public var borderSize:Float;
 	public var turretSprites:Array<FlxSprite>;
+	public var turretInfo:Array<TurretData>;
+	public var playerTurrets:FlxTypedGroup<Turret>;
+	public var currentTurretPosition:FlxSprite;
+	public var clickTurret:(TurretSelect, TurretData) -> Void;
 
 	public static inline var WIDTH:Int = 400;
 	public static inline var HEIGHT:Int = 60;
 	public static inline var BGCOLOR:Int = KColor.RICH_BLACK;
 
-	public function new(x:Float, y:Float) {
+	public function new(x:Float, y:Float,
+			playerTurrets:FlxTypedGroup<Turret>) {
 		super();
 		position = new FlxPoint(x, y);
 		borderSize = 4;
 		turretSprites = [];
+		turretInfo = [];
+		this.playerTurrets = playerTurrets;
 		create();
 	}
 
 	public function create() {
 		createBackground(position);
-		createNameText(position);
+		createStatText(position);
 		createTurrets(position);
+		createSelectionRect(position);
 	}
 
 	public function createBackground(positioin:FlxPoint) {
@@ -36,19 +45,19 @@ class TurretSelect extends FlxTypedGroup<FlxSprite> {
 		add(background);
 	}
 
-	public function createNameText(position:FlxPoint) {
+	public function createStatText(position:FlxPoint) {
 		var padding = 6;
 		var x = position.x + padding + borderSize;
 		var y = position.y + padding + borderSize;
-		nameText = new FlxText(x, y, cast WIDTH - (12 + borderSize), 'Name',
+		statText = new FlxText(x, y, cast WIDTH - (12 + borderSize), '',
 			Globals.FONT_N);
-		nameText.wordWrap = true;
+		statText.wordWrap = true;
 
-		add(nameText);
+		add(statText);
 	}
 
 	public function createTurrets(position:FlxPoint) {
-		var padding = 6;
+		var padding = 108;
 		var verticalPadding = 24;
 		var horizontalSpacing = 24;
 		var startPosition = background.x + padding;
@@ -65,15 +74,53 @@ class TurretSelect extends FlxTypedGroup<FlxSprite> {
 				sprite.loadGraphic(spriteRef, false, 16, 16);
 			}
 			turretSprites.push(sprite);
+			turretInfo.push(cast turretData);
 			add(sprite);
 		}
 	}
 
-	public function setName(value:String) {
-		nameText.text = value;
+	public function createSelectionRect(position:FlxPoint) {
+		selectionRect = new FlxSprite(0, 0);
+		// Add true here so that we don't affect other transparent spites
+		// With drawing the border with our draw rect
+		selectionRect.makeGraphic(16, 16, KColor.TRANSPARENT, true);
+		selectionRect.drawRect(0, 0, 16, 16, KColor.TRANSPARENT, {
+			thickness: 2,
+			color: KColor.WHITE
+		});
+		selectionRect.visible = false;
+		add(selectionRect);
 	}
 
-	public function updateTurretInformation() {}
+	override public function update(elapsed:Float) {
+		super.update(elapsed);
+		updateSelection();
+	}
+
+	public function updateSelection() {
+		for (i in 0...turretSprites.length) {
+			var turret = turretSprites[i];
+			var turretData = turretInfo[i];
+			if (FlxG.mouse.overlaps(turret)
+				&& currentTurretPosition != null && FlxG.mouse.justPressed) {
+				// Handle Clicking Turret for creation
+				if (clickTurret != null) {
+					clickTurret(this, turretData);
+				}
+			} else if (FlxG.mouse.overlaps(turret)) {
+				selectionRect.setPosition(turret.x, turret.y);
+				selectionRect.visible = true;
+				updateTurretInformation(turretData);
+			}
+		}
+	}
+
+	public function updateTurretInformation(turretData:TurretData) {
+		var atk = '${turretData.atk}'.rpad(' ', 5);
+		var atkSpd = '${turretData.atkSpd}'.rpad(' ', 5);
+		var range = '${turretData.range}'.rpad(' ', 5);
+		statText.text = 'Name ${turretData.name.capitalize().rpad(' ', 7)} Atk ${atk} AtkSpd ${atkSpd} Rng ${range}';
+	}
 
 	public function move(x:Float, y:Float) {
 		members.iter((member) -> {
@@ -95,6 +142,7 @@ class TurretSelect extends FlxTypedGroup<FlxSprite> {
 	}
 
 	public function hide() {
+		currentTurretPosition = null;
 		visible = false;
 	}
 }
