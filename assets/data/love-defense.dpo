@@ -163,7 +163,7 @@
                     "spd": 1,
                     "atkSpd": 1.5,
                     "range": 30,
-                    "sprite": "../../images/love-turret.png",
+                    "sprite": "../../images/love-turret-two.png",
                     "cost": 50
                 },
                 {
@@ -171,39 +171,39 @@
                     "id": "1",
                     "name": "nature",
                     "health": 1,
-                    "atk": 5,
+                    "atk": 2,
                     "def": 1,
                     "spd": 1,
-                    "atkSpd": 1.5,
-                    "range": 50,
-                    "sprite": "",
-                    "cost": 50
+                    "atkSpd": 2.5,
+                    "sprite": "../../images/love-nature-turret.png",
+                    "cost": 75,
+                    "range": 75
                 },
                 {
                     "guid": "ac940f86-8e72-4420-9767-d9b41b8a9e7d",
                     "id": "2",
                     "name": "bomb",
                     "health": 1,
-                    "atk": 5,
+                    "atk": 30,
                     "def": 1,
                     "spd": 1,
-                    "atkSpd": 1.5,
-                    "range": 50,
-                    "sprite": "",
-                    "cost": 50
+                    "atkSpd": 4.5,
+                    "range": 125,
+                    "sprite": "../../images/love-bomb-turret.png",
+                    "cost": 125
                 },
                 {
                     "guid": "f8b57356-cb63-4cae-af98-16ca7908ccb4",
                     "id": "3",
                     "name": "ice",
                     "health": 1,
-                    "atk": 5,
+                    "atk": 3,
                     "def": 1,
                     "spd": 1,
-                    "atkSpd": 1.5,
+                    "atkSpd": 3,
                     "range": 50,
-                    "sprite": "",
-                    "cost": 50
+                    "sprite": "../../images/love-ice-turret.png",
+                    "cost": 100
                 },
                 {
                     "guid": "653ec1b1-502e-4949-9e6d-153081f443d0",
@@ -213,10 +213,10 @@
                     "atk": 5,
                     "def": 1,
                     "spd": 1,
-                    "atkSpd": 1.5,
-                    "range": 50,
-                    "sprite": "",
-                    "cost": 50
+                    "atkSpd": 1,
+                    "range": 30,
+                    "sprite": "../../images/love-flame-turret.png",
+                    "cost": 65
                 }
             ],
             "hidden": false,
