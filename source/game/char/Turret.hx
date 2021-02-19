@@ -36,7 +36,7 @@ class Turret extends Actor {
 		var sprite = turretData.sprite.replace('../../', 'assets/');
 		loadGraphic(sprite, true, 16, 16, true);
 		animation.add('idle', [0]);
-		animation.add('fire', [0, 1, 2]);
+		animation.add('fire', [0, 1, 2], 6);
 	}
 
 	override public function update(elapsed:Float) {

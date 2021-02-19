@@ -338,6 +338,19 @@
                         "max": "int",
                         "defaultValue": "int"
                     }
+                },
+                {
+                    "typeStr": "image",
+                    "guid": "46c7b614-dcfd-47d4-b458-afd188943963",
+                    "name": "sprite",
+                    "description": "Enemy sprite information",
+                    "defaultValue": "",
+                    "iconName": "newImage",
+                    "configurable": {
+                        "name": "text",
+                        "description": "text",
+                        "defaultValue": "text"
+                    }
                 }
             ],
             "lines": [
@@ -347,9 +360,21 @@
                     "name": "Grunt",
                     "atk": 3,
                     "def": 1,
-                    "spd": 10,
+                    "spd": 20,
                     "health": 10,
-                    "points": 10
+                    "points": 10,
+                    "sprite": "../../images/enemyOne.png"
+                },
+                {
+                    "guid": "2dd50ac1-4c51-4aa7-a233-28154d5705db",
+                    "id": "1",
+                    "name": "Speedy",
+                    "atk": 3,
+                    "def": 1,
+                    "spd": 40,
+                    "health": 7,
+                    "points": 20,
+                    "sprite": "../../images/speedy.png"
                 }
             ],
             "hidden": false,

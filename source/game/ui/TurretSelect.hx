@@ -71,7 +71,7 @@ class TurretSelect extends FlxTypedGroup<FlxSprite> {
 			x += horizontalSpacing + sprite.width;
 			var spriteRef = turretData.sprite.replace('../../', 'assets/');
 			if (turretData.sprite.length > 0) {
-				sprite.loadGraphic(spriteRef, false, 16, 16);
+				sprite.loadGraphic(spriteRef, true, 16, 16, true);
 			}
 			turretSprites.push(sprite);
 			turretInfo.push(cast turretData);
