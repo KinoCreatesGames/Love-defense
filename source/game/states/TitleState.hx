@@ -149,9 +149,8 @@ Left/Right: A/Left, S/Right', textSize);
 	public function createVersion() {
 		var textWidth = 200;
 		var textSize = 12;
-		var versionText = new FlxText(FlxG.width - textWidth,
-			FlxG.height - 20, textWidth, Globals.TEXT_VERSION, textSize);
-		versionText.screenCenter(FlxAxes.X);
+		var versionText = new FlxText(20, FlxG.height - 20, textWidth,
+			Globals.TEXT_VERSION, textSize);
 		add(versionText);
 	}
 }
