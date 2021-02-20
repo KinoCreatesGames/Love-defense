@@ -236,8 +236,18 @@ class LevelState extends FlxState {
 
 	public function createDamageArea(layer:TiledObjectLayer) {
 		layer.objects.iter((tObj) -> {
+			var yOffset = 6;
 			var sprite = new FlxSprite(tObj.x, tObj.y);
-			sprite.makeGraphic(16, 16, KColor.TRANSPARENT);
+			sprite.loadGraphic(AssetPaths.crystal_defense__png, true, 16, 16);
+			sprite.animation.add('idle', [0, 1, 2], 6, true);
+			sprite.animation.add('hurt', [3], 6, false);
+			sprite.animation.play('idle');
+			sprite.animation.finishCallback = (animName) -> {
+				if (animName == 'hurt') {
+					trace('Play Idle');
+					sprite.animation.play('idle');
+				}
+			};
 			playerDamageGrp.add(sprite);
 		});
 	}
@@ -245,7 +255,9 @@ class LevelState extends FlxState {
 	public function createHeart(layer:TiledObjectLayer) {
 		layer.objects.iter((tObj) -> {
 			heart = new FlxSprite(tObj.x, tObj.y);
-			heart.makeGraphic(16, 16, KColor.RED);
+			heart.loadGraphic(AssetPaths.heart_nexus__png, true, 16, 16);
+			heart.animation.add('idle', [0, 1, 2, 3, 4], true);
+			heart.animation.play('idle');
 			// Set Health to 100
 			heart.health = 100;
 			playerDamageGrp.add(heart);
@@ -277,6 +289,7 @@ class LevelState extends FlxState {
 
 	public function enemyTouchDamageArea(enemy:Enemy, damageArea:FlxSprite) {
 		damageSound.play();
+		damageArea.animation.play('hurt');
 		heart.health -= enemy.atk;
 		enemy.kill();
 		FlxG.camera.shake(0.01, 0.1);
