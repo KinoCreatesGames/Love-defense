@@ -190,7 +190,7 @@
                     "atkSpd": 10,
                     "range": 125,
                     "sprite": "../../images/love-bomb-turret.png",
-                    "cost": 125
+                    "cost": 200
                 },
                 {
                     "guid": "f8b57356-cb63-4cae-af98-16ca7908ccb4",

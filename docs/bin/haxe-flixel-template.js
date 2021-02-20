@@ -869,7 +869,7 @@ ApplicationMain.main = function() {
 ApplicationMain.create = function(config) {
 	var app = new openfl_display_Application();
 	ManifestResources.init(config);
-	app.meta.h["build"] = "43";
+	app.meta.h["build"] = "44";
 	app.meta.h["company"] = "KinoCreatesGames";
 	app.meta.h["file"] = "haxe-flixel-template";
 	app.meta.h["name"] = "Love Defense";
@@ -67792,7 +67792,7 @@ var lime_utils_AssetCache = function() {
 	this.audio = new haxe_ds_StringMap();
 	this.font = new haxe_ds_StringMap();
 	this.image = new haxe_ds_StringMap();
-	this.version = 708546;
+	this.version = 476589;
 };
 $hxClasses["lime.utils.AssetCache"] = lime_utils_AssetCache;
 lime_utils_AssetCache.__name__ = "lime.utils.AssetCache";
@@ -109278,7 +109278,7 @@ AssetPaths.title_music__ogg = "assets/music/title-music.ogg";
 AssetPaths.movingrightalong__wav = "assets/music/movingrightalong.wav";
 AssetPaths.data_goes_here__txt = "assets/data/data-goes-here.txt";
 AssetPaths.love_defense__dpo = "assets/data/love-defense.dpo";
-DepotData.Turrets = { name : "turrets", lines : [{ spd : 1, atkSpd : 2, name : "arrow", guid : "35c39b2e-8658-40a8-b177-97d0249c203a", sprite : "../../images/love-turret-two.png", cost : 50, id : "0", atk : 5, health : 1, def : 1, range : 50},{ spd : 1, atkSpd : 2.5, name : "nature", guid : "5e83eafb-635c-46dc-ac1a-86bf9029d343", sprite : "../../images/love-nature-turret.png", cost : 75, id : "1", atk : 3, health : 1, def : 1, range : 75},{ spd : 1, atkSpd : 10, name : "bomb", guid : "ac940f86-8e72-4420-9767-d9b41b8a9e7d", sprite : "../../images/love-bomb-turret.png", cost : 125, id : "2", atk : 10, health : 1, def : 1, range : 125},{ spd : 1, atkSpd : 5.5, name : "ice", guid : "f8b57356-cb63-4cae-af98-16ca7908ccb4", sprite : "../../images/love-ice-turret.png", cost : 100, id : "3", atk : 6, health : 1, def : 1, range : 60},{ spd : 1, atkSpd : 1, name : "flaming", guid : "653ec1b1-502e-4949-9e6d-153081f443d0", sprite : "../../images/love-flame-turret.png", cost : 40, id : "4", atk : 2, health : 1, def : 1, range : 30}], isProps : false, hidden : false, guid : "81673e9f-2f72-4326-bbf7-8fd38f265168", displayColumn : "id", description : "Information on turret stats", configurable : { name : "text", description : "text", displayColumn : "columnSelect@name", "columnSelect@name@displayColumn" : { allowedTypes : ["int","float","text","longtext"]}}};
+DepotData.Turrets = { name : "turrets", lines : [{ spd : 1, atkSpd : 2, name : "arrow", guid : "35c39b2e-8658-40a8-b177-97d0249c203a", sprite : "../../images/love-turret-two.png", cost : 50, id : "0", atk : 5, health : 1, def : 1, range : 50},{ spd : 1, atkSpd : 2.5, name : "nature", guid : "5e83eafb-635c-46dc-ac1a-86bf9029d343", sprite : "../../images/love-nature-turret.png", cost : 75, id : "1", atk : 3, health : 1, def : 1, range : 75},{ spd : 1, atkSpd : 10, name : "bomb", guid : "ac940f86-8e72-4420-9767-d9b41b8a9e7d", sprite : "../../images/love-bomb-turret.png", cost : 200, id : "2", atk : 10, health : 1, def : 1, range : 125},{ spd : 1, atkSpd : 5.5, name : "ice", guid : "f8b57356-cb63-4cae-af98-16ca7908ccb4", sprite : "../../images/love-ice-turret.png", cost : 100, id : "3", atk : 6, health : 1, def : 1, range : 60},{ spd : 1, atkSpd : 1, name : "flaming", guid : "653ec1b1-502e-4949-9e6d-153081f443d0", sprite : "../../images/love-flame-turret.png", cost : 40, id : "4", atk : 2, health : 1, def : 1, range : 30}], isProps : false, hidden : false, guid : "81673e9f-2f72-4326-bbf7-8fd38f265168", displayColumn : "id", description : "Information on turret stats", configurable : { name : "text", description : "text", displayColumn : "columnSelect@name", "columnSelect@name@displayColumn" : { allowedTypes : ["int","float","text","longtext"]}}};
 DepotData.Enemies = { name : "enemies", lines : [{ spd : 20, name : "Grunt", points : 5, guid : "e330f765-2748-4c3e-88e6-23fc00d2b938", sprite : "../../images/enemyOne.png", id : "0", atk : 3, health : 10, def : 1},{ spd : 40, name : "Speedy", points : 10, guid : "2dd50ac1-4c51-4aa7-a233-28154d5705db", sprite : "../../images/speedy.png", id : "1", atk : 3, health : 7, def : 1}], isProps : false, hidden : false, guid : "5e1d3a27-fe5d-46a5-b890-a2261554cd2f", displayColumn : "id", description : "Enemy stats", configurable : { name : "text", description : "text", displayColumn : "columnSelect@name", "columnSelect@name@displayColumn" : { allowedTypes : ["int","float","text","longtext"]}}};
 Globals.GAME_TITLE = "Love Defense ";
 Globals.GAME_SAVE_SLOTS = 5;
