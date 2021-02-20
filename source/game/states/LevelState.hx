@@ -236,8 +236,8 @@ class LevelState extends FlxState {
 
 	public function createDamageArea(layer:TiledObjectLayer) {
 		layer.objects.iter((tObj) -> {
-			var yOffset = 6;
-			var sprite = new FlxSprite(tObj.x, tObj.y);
+			var yOffset = -6;
+			var sprite = new FlxSprite(tObj.x, tObj.y + yOffset);
 			sprite.loadGraphic(AssetPaths.crystal_defense__png, true, 16, 16);
 			sprite.animation.add('idle', [0, 1, 2], 6, true);
 			sprite.animation.add('hurt', [3], 6, false);
@@ -254,7 +254,8 @@ class LevelState extends FlxState {
 
 	public function createHeart(layer:TiledObjectLayer) {
 		layer.objects.iter((tObj) -> {
-			heart = new FlxSprite(tObj.x, tObj.y);
+			var yOffset = -6;
+			heart = new FlxSprite(tObj.x, tObj.y + yOffset);
 			heart.loadGraphic(AssetPaths.heart_nexus__png, true, 16, 16);
 			heart.animation.add('idle', [0, 1, 2, 3, 4], true);
 			heart.animation.play('idle');
