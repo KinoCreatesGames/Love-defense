@@ -257,7 +257,7 @@ class LevelState extends FlxState {
 			var yOffset = -6;
 			heart = new FlxSprite(tObj.x, tObj.y + yOffset);
 			heart.loadGraphic(AssetPaths.heart_nexus__png, true, 16, 16);
-			heart.animation.add('idle', [0, 1, 2, 3, 4], true);
+			heart.animation.add('idle', [0, 1, 2, 3, 4], 6, true);
 			heart.animation.play('idle');
 			// Set Health to 100
 			heart.health = 100;
