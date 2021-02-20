@@ -243,7 +243,6 @@ class LevelState extends FlxState {
 			sprite.animation.play('idle');
 			sprite.animation.finishCallback = (animName) -> {
 				if (animName == 'hurt') {
-					trace('Play Idle');
 					sprite.animation.play('idle');
 				}
 			};
