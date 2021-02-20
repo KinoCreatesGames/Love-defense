@@ -161,8 +161,8 @@
                     "atk": 5,
                     "def": 1,
                     "spd": 1,
-                    "atkSpd": 1.5,
-                    "range": 30,
+                    "atkSpd": 2,
+                    "range": 50,
                     "sprite": "../../images/love-turret-two.png",
                     "cost": 50
                 },
@@ -213,7 +213,7 @@
                     "atk": 2,
                     "def": 1,
                     "spd": 1,
-                    "atkSpd": 0.5,
+                    "atkSpd": 1,
                     "range": 30,
                     "sprite": "../../images/love-flame-turret.png",
                     "cost": 40
