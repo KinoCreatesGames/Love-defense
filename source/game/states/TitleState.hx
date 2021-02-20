@@ -97,7 +97,7 @@ class TitleState extends FlxState {
 			}
 
 			#if desktop
-			if (creditsButton.alpha >= .9) {
+			if (playButton.alpha >= .9) {
 				exitButton.fadeIn(fadeTime);
 				completeFadeStart = true;
 			}
