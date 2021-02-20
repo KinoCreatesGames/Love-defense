@@ -11,6 +11,7 @@ class Turret extends Actor {
 	public var ai:State;
 	public var enemyGrp:FlxTypedGroup<Enemy>;
 	public var playerBullets:FlxTypedGroup<Bullet>;
+	public var fireSound:FlxSound;
 
 	public static inline var PROJECTILE_SPEED:Float = 600;
 
@@ -19,6 +20,7 @@ class Turret extends Actor {
 		super(x, y, turretData);
 		fireCD = 0;
 		ai = new State(idle);
+		fireSound = FlxG.sound.load(AssetPaths.bullet_fire__wav);
 		playerBullets = bulletGrp;
 	}
 
@@ -71,6 +73,7 @@ class Turret extends Actor {
 	public function fireAtEnemy() {
 		var enemy = enemyInRange();
 		if (fireCD >= atkSpd) {
+			fireSound.play();
 			var bullet = playerBullets.recycle(Bullet);
 			bullet.setBulletType(this.name);
 			bullet.setPosition(this.getMidpoint().x, y);

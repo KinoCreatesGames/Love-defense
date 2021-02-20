@@ -40,7 +40,12 @@ class LevelState extends FlxState {
 	public var menuIn:FlxSound;
 	public var menuOut:FlxSound;
 	public var damageSound:FlxSound;
+	public var enemyDamageSound:FlxSound;
 	public var buttonClickSound:FlxSound;
+	// Music
+	public var setupMusic:FlxSound;
+	public var gameplayMusic:FlxSound;
+	public var startedLevelMusic:Bool;
 
 	// Groups
 	public var playerTurrets:FlxTypedGroup<Turret>;
@@ -63,7 +68,9 @@ class LevelState extends FlxState {
 		menuIn = FlxG.sound.load(AssetPaths.menu_open__wav);
 		menuOut = FlxG.sound.load(AssetPaths.turret_menu_exit__wav);
 		damageSound = FlxG.sound.load(AssetPaths.impact_heart__wav);
+		enemyDamageSound = FlxG.sound.load(AssetPaths.enemy_impact__wav);
 		buttonClickSound = FlxG.sound.load(AssetPaths.button_click__wav);
+		startedLevelMusic = false;
 		setSetupTime();
 		setLevelTime();
 		setTurretPoints();
@@ -130,6 +137,9 @@ class LevelState extends FlxState {
 		add(playerBullets);
 		add(hud);
 		add(turretSelect);
+
+		// Start Music
+		FlxG.sound.playMusic(AssetPaths.setup_music__ogg);
 	}
 
 	public function createUI() {
@@ -276,6 +286,7 @@ class LevelState extends FlxState {
 	}
 
 	public function playerBulletTouchEnemy(bullet:Bullet, enemy:Enemy) {
+		enemyDamageSound.play();
 		enemy.health -= bullet.atk;
 		bullet.kill();
 		if (enemy.health <= 0) {
@@ -307,7 +318,12 @@ class LevelState extends FlxState {
 			setupTime -= elapsed;
 			hud.setTimer(setupTime);
 		} else if (setupTime <= 0) {
-			// Start Level Time & Spawners
+			// Start Level Time & Spawners & Music
+			if (startedLevelMusic == false) {
+				FlxG.sound.music.stop();
+				FlxG.sound.playMusic(AssetPaths.movingrightalong__wav, 1);
+				startedLevelMusic = true;
+			}
 			hud.setStateText(Globals.TEXT_START_GAME);
 			hud.stateText.fadeOut(2);
 			startSpawners();
