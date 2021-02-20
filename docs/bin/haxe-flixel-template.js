@@ -869,7 +869,7 @@ ApplicationMain.main = function() {
 ApplicationMain.create = function(config) {
 	var app = new openfl_display_Application();
 	ManifestResources.init(config);
-	app.meta.h["build"] = "33";
+	app.meta.h["build"] = "34";
 	app.meta.h["company"] = "KinoCreatesGames";
 	app.meta.h["file"] = "haxe-flixel-template";
 	app.meta.h["name"] = "Love Defense";
@@ -4250,7 +4250,7 @@ ManifestResources.init = function(config) {
 	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$nokiafc22_$ttf);
 	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$monsterrat_$ttf);
 	var bundle;
-	var data = "{\"name\":null,\"assets\":\"aoy4:pathy33:assets%2Fmaps%2Flove-defense.ldtky4:sizei49726y4:typey4:TEXTy2:idR1y7:preloadtgoR0y51:assets%2Fmaps%2Flove-defense%2Ftiled%2FLevelOne.tmxR2i10825R3R4R5R7R6tgoR0y57:assets%2Fmaps%2Flove-defense%2Ftiled%2Flove-defense.worldR2i79R3R4R5R8R6tgoR2i4758R3y5:SOUNDR5y31:assets%2Fsounds%2Ffootsteps.wavy9:pathGroupaR10hR6tgoR2i3672R3R9R5y32:assets%2Fsounds%2Fmouse-over.wavR11aR12hR6tgoR2i6900R3R9R5y31:assets%2Fsounds%2Fmenu-open.wavR11aR13hR6tgoR2i8410R3R9R5y34:assets%2Fsounds%2Fimpact-heart.wavR11aR14hR6tgoR2i4584R3R9R5y33:assets%2Fsounds%2Fbullet-fire.wavR11aR15hR6tgoR2i19472R3R9R5y31:assets%2Fsounds%2Fpause-out.wavR11aR16hR6tgoR2i60190R3R9R5y30:assets%2Fsounds%2Fpower-up.wavR11aR17hR6tgoR2i4578R3R9R5y38:assets%2Fsounds%2Fturret-menu-exit.wavR11aR18hR6tgoR2i8378R3R9R5y34:assets%2Fsounds%2Fbutton-click.wavR11aR19hR6tgoR2i12492R3R9R5y34:assets%2Fsounds%2Fenemy-impact.wavR11aR20hR6tgoR2i218252R3R9R5y34:assets%2Fsounds%2Fheart-blowup.wavR11aR21hR6tgoR2i22964R3R9R5y30:assets%2Fsounds%2Fpause-in.wavR11aR22hR6tgoR0y36:assets%2Fsounds%2Fsounds-go-here.txtR2zR3R4R5R23R6tgoR2i39740R3R9R5y32:assets%2Fsounds%2Flow-health.wavR11aR24hR6tgoR0y35:assets%2Fimages%2Ffloor-tileset.pngR2i691R3y5:IMAGER5R25R6tgoR0y29:assets%2Fimages%2Fcog-two.pngR2i512R3R26R5R27R6tgoR0y28:assets%2Fimages%2Fbutton.pngR2i1126R3R26R5R28R6tgoR0y31:assets%2Fimages%2Fexit-door.pngR2i382R3R26R5R29R6tgoR0y37:assets%2Fimages%2Fcrystal-defense.pngR2i318R3R26R5R30R6tgoR0y34:assets%2Fimages%2Fmonster-gate.pngR2i142R3R26R5R31R6tgoR0y33:assets%2Fimages%2Flove-turret.pngR2i244R3R26R5R32R6tgoR0y30:assets%2Fimages%2FenemyOne.pngR2i370R3R26R5R33R6tgoR0y38:assets%2Fimages%2Flove-bomb-turret.pngR2i311R3R26R5R34R6tgoR0y36:assets%2Fimages%2Fimages-go-here.txtR2zR3R4R5R35R6tgoR0y33:assets%2Fimages%2Fheart-nexus.pngR2i314R3R26R5R36R6tgoR0y37:assets%2Fimages%2Faffection-heart.pngR2i685R3R26R5R37R6tgoR0y37:assets%2Fimages%2Flove-ice-turret.pngR2i295R3R26R5R38R6tgoR0y34:assets%2Fimages%2Fdialog-arrow.pngR2i261R3R26R5R39R6tgoR0y40:assets%2Fimages%2Flove-nature-turret.pngR2i327R3R26R5R40R6tgoR0y37:assets%2Fimages%2Flove-turret-two.pngR2i330R3R26R5R41R6tgoR0y28:assets%2Fimages%2Fspeedy.pngR2i249R3R26R5R42R6tgoR0y39:assets%2Fimages%2Flove-flame-turret.pngR2i265R3R26R5R43R6tgoR0y36:assets%2Fmusic%2Fmusic-goes-here.txtR2zR3R4R5R44R6tgoR2i1322654R3y5:MUSICR5y32:assets%2Fmusic%2Fsetup-music.oggR11aR46hR6tgoR2i4096760R3R9R5y37:assets%2Fmusic%2Fmovingrightalong.wavR11aR47hR6tgoR2i2789536R3R45R5y61:assets%2Fmusic%2Ftriangular%20ideology-the%20fan%20sequel.oggR11aR48hR6tgoR0y34:assets%2Fdata%2Fdata-goes-here.txtR2zR3R4R5R49R6tgoR0y32:assets%2Fdata%2Flove-defense.dpoR2i14737R3R4R5R50R6tgoR2i39706R3R45R5y28:flixel%2Fsounds%2Fflixel.mp3R11aR51y28:flixel%2Fsounds%2Fflixel.ogghR6tgoR2i2114R3R45R5y26:flixel%2Fsounds%2Fbeep.mp3R11aR53y26:flixel%2Fsounds%2Fbeep.ogghR6tgoR2i5794R3R9R5R54R11aR53R54hgoR2i33629R3R9R5R52R11aR51R52hgoR2i15744R3y4:FONTy9:classNamey35:__ASSET__flixel_fonts_nokiafc22_ttfR5y30:flixel%2Ffonts%2Fnokiafc22.ttfR6tgoR2i29724R3R55R56y36:__ASSET__flixel_fonts_monsterrat_ttfR5y31:flixel%2Ffonts%2Fmonsterrat.ttfR6tgoR0y33:flixel%2Fimages%2Fui%2Fbutton.pngR2i519R3R26R5R61R6tgoR0y36:flixel%2Fimages%2Flogo%2Fdefault.pngR2i3280R3R26R5R62R6tgh\",\"rootPath\":null,\"version\":2,\"libraryArgs\":[],\"libraryType\":null}";
+	var data = "{\"name\":null,\"assets\":\"aoy4:pathy33:assets%2Fmaps%2Flove-defense.ldtky4:sizei49726y4:typey4:TEXTy2:idR1y7:preloadtgoR0y51:assets%2Fmaps%2Flove-defense%2Ftiled%2FLevelOne.tmxR2i10825R3R4R5R7R6tgoR0y57:assets%2Fmaps%2Flove-defense%2Ftiled%2Flove-defense.worldR2i79R3R4R5R8R6tgoR2i4758R3y5:SOUNDR5y31:assets%2Fsounds%2Ffootsteps.wavy9:pathGroupaR10hR6tgoR2i3672R3R9R5y32:assets%2Fsounds%2Fmouse-over.wavR11aR12hR6tgoR2i6900R3R9R5y31:assets%2Fsounds%2Fmenu-open.wavR11aR13hR6tgoR2i8410R3R9R5y34:assets%2Fsounds%2Fimpact-heart.wavR11aR14hR6tgoR2i4584R3R9R5y33:assets%2Fsounds%2Fbullet-fire.wavR11aR15hR6tgoR2i19472R3R9R5y31:assets%2Fsounds%2Fpause-out.wavR11aR16hR6tgoR2i60190R3R9R5y30:assets%2Fsounds%2Fpower-up.wavR11aR17hR6tgoR2i4578R3R9R5y38:assets%2Fsounds%2Fturret-menu-exit.wavR11aR18hR6tgoR2i8378R3R9R5y34:assets%2Fsounds%2Fbutton-click.wavR11aR19hR6tgoR2i12492R3R9R5y34:assets%2Fsounds%2Fenemy-impact.wavR11aR20hR6tgoR2i218252R3R9R5y34:assets%2Fsounds%2Fheart-blowup.wavR11aR21hR6tgoR2i22964R3R9R5y30:assets%2Fsounds%2Fpause-in.wavR11aR22hR6tgoR0y36:assets%2Fsounds%2Fsounds-go-here.txtR2zR3R4R5R23R6tgoR2i39740R3R9R5y32:assets%2Fsounds%2Flow-health.wavR11aR24hR6tgoR0y35:assets%2Fimages%2Ffloor-tileset.pngR2i691R3y5:IMAGER5R25R6tgoR0y29:assets%2Fimages%2Fcog-two.pngR2i512R3R26R5R27R6tgoR0y28:assets%2Fimages%2Fbutton.pngR2i1126R3R26R5R28R6tgoR0y31:assets%2Fimages%2Fexit-door.pngR2i382R3R26R5R29R6tgoR0y37:assets%2Fimages%2Fcrystal-defense.pngR2i318R3R26R5R30R6tgoR0y34:assets%2Fimages%2Fmonster-gate.pngR2i142R3R26R5R31R6tgoR0y33:assets%2Fimages%2Flove-turret.pngR2i244R3R26R5R32R6tgoR0y30:assets%2Fimages%2FenemyOne.pngR2i370R3R26R5R33R6tgoR0y38:assets%2Fimages%2Flove-bomb-turret.pngR2i311R3R26R5R34R6tgoR0y36:assets%2Fimages%2Fimages-go-here.txtR2zR3R4R5R35R6tgoR0y33:assets%2Fimages%2Fheart-nexus.pngR2i314R3R26R5R36R6tgoR0y37:assets%2Fimages%2Faffection-heart.pngR2i685R3R26R5R37R6tgoR0y37:assets%2Fimages%2Flove-ice-turret.pngR2i295R3R26R5R38R6tgoR0y34:assets%2Fimages%2Fdialog-arrow.pngR2i261R3R26R5R39R6tgoR0y40:assets%2Fimages%2Flove-nature-turret.pngR2i327R3R26R5R40R6tgoR0y37:assets%2Fimages%2Flove-turret-two.pngR2i330R3R26R5R41R6tgoR0y28:assets%2Fimages%2Fspeedy.pngR2i249R3R26R5R42R6tgoR0y39:assets%2Fimages%2Flove-flame-turret.pngR2i265R3R26R5R43R6tgoR0y36:assets%2Fmusic%2Fmusic-goes-here.txtR2zR3R4R5R44R6tgoR2i1322654R3y5:MUSICR5y32:assets%2Fmusic%2Fsetup-music.oggR11aR46hR6tgoR2i2789536R3R45R5y32:assets%2Fmusic%2Ftitle-music.oggR11aR47hR6tgoR2i4096760R3R9R5y37:assets%2Fmusic%2Fmovingrightalong.wavR11aR48hR6tgoR2i2789536R3R45R5y61:assets%2Fmusic%2Ftriangular%20ideology-the%20fan%20sequel.oggR11aR49hR6tgoR0y34:assets%2Fdata%2Fdata-goes-here.txtR2zR3R4R5R50R6tgoR0y32:assets%2Fdata%2Flove-defense.dpoR2i14737R3R4R5R51R6tgoR2i39706R3R45R5y28:flixel%2Fsounds%2Fflixel.mp3R11aR52y28:flixel%2Fsounds%2Fflixel.ogghR6tgoR2i2114R3R45R5y26:flixel%2Fsounds%2Fbeep.mp3R11aR54y26:flixel%2Fsounds%2Fbeep.ogghR6tgoR2i5794R3R9R5R55R11aR54R55hgoR2i33629R3R9R5R53R11aR52R53hgoR2i15744R3y4:FONTy9:classNamey35:__ASSET__flixel_fonts_nokiafc22_ttfR5y30:flixel%2Ffonts%2Fnokiafc22.ttfR6tgoR2i29724R3R56R57y36:__ASSET__flixel_fonts_monsterrat_ttfR5y31:flixel%2Ffonts%2Fmonsterrat.ttfR6tgoR0y33:flixel%2Fimages%2Fui%2Fbutton.pngR2i519R3R26R5R62R6tgoR0y36:flixel%2Fimages%2Flogo%2Fdefault.pngR2i3280R3R26R5R63R6tgh\",\"rootPath\":null,\"version\":2,\"libraryArgs\":[],\"libraryType\":null}";
 	var manifest = lime_utils_AssetManifest.parse(data,ManifestResources.rootPath);
 	var library = lime_utils_AssetLibrary.fromManifest(manifest);
 	lime_utils_Assets.registerLibrary("default",library);
@@ -48816,6 +48816,7 @@ game_states_TitleState.__name__ = "game.states.TitleState";
 game_states_TitleState.__super__ = flixel_FlxState;
 game_states_TitleState.prototype = $extend(flixel_FlxState.prototype,{
 	create: function() {
+		flixel_FlxG.sound.playMusic("assets/music/title-music.ogg");
 		flixel_FlxG.mouse.set_visible(true);
 		this.set_bgColor(-15790578);
 		var text = new flixel_text_FlxText(0,0,-1,"Love Defense ",32);
@@ -48896,10 +48897,22 @@ game_states_TitleState.prototype = $extend(flixel_FlxState.prototype,{
 		}
 	}
 	,clickStart: function() {
-		var nextState = new game_states_LevelOneState();
-		if(flixel_FlxG.game._state.switchTo(nextState)) {
-			flixel_FlxG.game._requestedState = nextState;
-		}
+		flixel_FlxG.camera.fade(-16777216,1,false,function() {
+			var _this = flixel_FlxG.sound.music;
+			var Duration = 1;
+			if(Duration == null) {
+				Duration = 1;
+			}
+			if(_this.fadeTween != null) {
+				_this.fadeTween.cancel();
+			}
+			_this.fadeTween = flixel_tweens_FlxTween.num(_this._volume,0,Duration,{ onComplete : null},$bind(_this,_this.volumeTween));
+			flixel_FlxG.camera.fade(-16777216,1,true);
+			var nextState = new game_states_LevelOneState();
+			if(flixel_FlxG.game._state.switchTo(nextState)) {
+				flixel_FlxG.game._requestedState = nextState;
+			}
+		});
 	}
 	,createControls: function() {
 		var textWidth = 200;
@@ -67781,7 +67794,7 @@ var lime_utils_AssetCache = function() {
 	this.audio = new haxe_ds_StringMap();
 	this.font = new haxe_ds_StringMap();
 	this.image = new haxe_ds_StringMap();
-	this.version = 453819;
+	this.version = 977905;
 };
 $hxClasses["lime.utils.AssetCache"] = lime_utils_AssetCache;
 lime_utils_AssetCache.__name__ = "lime.utils.AssetCache";
@@ -109263,6 +109276,7 @@ AssetPaths.speedy__png = "assets/images/speedy.png";
 AssetPaths.love_flame_turret__png = "assets/images/love-flame-turret.png";
 AssetPaths.music_goes_here__txt = "assets/music/music-goes-here.txt";
 AssetPaths.setup_music__ogg = "assets/music/setup-music.ogg";
+AssetPaths.title_music__ogg = "assets/music/title-music.ogg";
 AssetPaths.movingrightalong__wav = "assets/music/movingrightalong.wav";
 AssetPaths.data_goes_here__txt = "assets/data/data-goes-here.txt";
 AssetPaths.love_defense__dpo = "assets/data/love-defense.dpo";
