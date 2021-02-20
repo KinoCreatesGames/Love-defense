@@ -108,7 +108,9 @@ class TurretSelect extends FlxTypedGroup<FlxSprite> {
 
 	override public function update(elapsed:Float) {
 		super.update(elapsed);
-		updateSelection();
+		if (visible == true) {
+			updateSelection();
+		}
 	}
 
 	public function updateSelection() {
