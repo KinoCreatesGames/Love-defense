@@ -12,7 +12,8 @@ class TurretSelect extends FlxTypedGroup<FlxSprite> {
 	public var playerTurrets:FlxTypedGroup<Turret>;
 	public var currentTurretPosition:FlxSprite;
 	public var clickTurret:(TurretSelect, TurretData) -> Void;
-	public var buttonClickSound:FlxSound;
+
+	public var selectSound:FlxSound;
 
 	public static inline var WIDTH:Int = 400;
 	public static inline var HEIGHT:Int = 60;
@@ -26,7 +27,8 @@ class TurretSelect extends FlxTypedGroup<FlxSprite> {
 		turretSprites = [];
 		turretInfo = [];
 		this.playerTurrets = playerTurrets;
-		buttonClickSound = FlxG.sound.load(AssetPaths.button_click__wav);
+
+		selectSound = FlxG.sound.load(AssetPaths.mouse_over__wav);
 		create();
 	}
 
@@ -117,10 +119,11 @@ class TurretSelect extends FlxTypedGroup<FlxSprite> {
 				&& currentTurretPosition != null && FlxG.mouse.justPressed) {
 				// Handle Clicking Turret for creation & Range Indicator
 				if (clickTurret != null) {
-					buttonClickSound.play();
 					clickTurret(this, turretData);
 				}
-			} else if (FlxG.mouse.overlaps(turret)) {
+			} else if (FlxG.mouse.overlaps(turret)
+				&& turret.x != selectionRect.x) {
+				selectSound.play();
 				selectionRect.setPosition(turret.x, turret.y);
 				selectionRect.visible = true;
 				updateTurretInformation(turretData);

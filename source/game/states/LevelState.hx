@@ -40,6 +40,7 @@ class LevelState extends FlxState {
 	public var menuIn:FlxSound;
 	public var menuOut:FlxSound;
 	public var damageSound:FlxSound;
+	public var buttonClickSound:FlxSound;
 
 	// Groups
 	public var playerTurrets:FlxTypedGroup<Turret>;
@@ -62,6 +63,7 @@ class LevelState extends FlxState {
 		menuIn = FlxG.sound.load(AssetPaths.menu_open__wav);
 		menuOut = FlxG.sound.load(AssetPaths.turret_menu_exit__wav);
 		damageSound = FlxG.sound.load(AssetPaths.impact_heart__wav);
+		buttonClickSound = FlxG.sound.load(AssetPaths.button_click__wav);
 		setSetupTime();
 		setLevelTime();
 		setTurretPoints();
@@ -142,6 +144,7 @@ class LevelState extends FlxState {
 	public function clickTurret(tSelect:TurretSelect, turretData:TurretData) {
 		var tPos = tSelect.currentTurretPosition;
 		if (turretPoints >= turretData.cost && !tPos.overlaps(playerTurrets)) {
+			buttonClickSound.play();
 			var yOffset = -6;
 			var turret = new Turret(tPos.x, tPos.y + yOffset, turretData,
 				playerBullets);
