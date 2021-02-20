@@ -869,7 +869,7 @@ ApplicationMain.main = function() {
 ApplicationMain.create = function(config) {
 	var app = new openfl_display_Application();
 	ManifestResources.init(config);
-	app.meta.h["build"] = "37";
+	app.meta.h["build"] = "38";
 	app.meta.h["company"] = "KinoCreatesGames";
 	app.meta.h["file"] = "haxe-flixel-template";
 	app.meta.h["name"] = "Love Defense";
@@ -48600,7 +48600,6 @@ game_states_LevelState.prototype = $extend(flixel_FlxState.prototype,{
 			sprite.animation.play("idle");
 			sprite.animation.finishCallback = function(animName) {
 				if(animName == "hurt") {
-					haxe_Log.trace("Play Idle",{ fileName : "source/game/states/LevelState.hx", lineNumber : 246, className : "game.states.LevelState", methodName : "createDamageArea"});
 					sprite.animation.play("idle");
 				}
 			};
@@ -67793,7 +67792,7 @@ var lime_utils_AssetCache = function() {
 	this.audio = new haxe_ds_StringMap();
 	this.font = new haxe_ds_StringMap();
 	this.image = new haxe_ds_StringMap();
-	this.version = 225483;
+	this.version = 632825;
 };
 $hxClasses["lime.utils.AssetCache"] = lime_utils_AssetCache;
 lime_utils_AssetCache.__name__ = "lime.utils.AssetCache";
