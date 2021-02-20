@@ -869,7 +869,7 @@ ApplicationMain.main = function() {
 ApplicationMain.create = function(config) {
 	var app = new openfl_display_Application();
 	ManifestResources.init(config);
-	app.meta.h["build"] = "34";
+	app.meta.h["build"] = "35";
 	app.meta.h["company"] = "KinoCreatesGames";
 	app.meta.h["file"] = "haxe-flixel-template";
 	app.meta.h["name"] = "Love Defense";
@@ -48929,8 +48929,7 @@ game_states_TitleState.prototype = $extend(flixel_FlxState.prototype,{
 	,createVersion: function() {
 		var textWidth = 200;
 		var textSize = 12;
-		var versionText = new flixel_text_FlxText(flixel_FlxG.width - textWidth,flixel_FlxG.height - 20,textWidth,"Version: Valentine's Day",textSize);
-		versionText.screenCenter(flixel_util_FlxAxes.X);
+		var versionText = new flixel_text_FlxText(20,flixel_FlxG.height - 20,textWidth,"Version: Valentine's Day",textSize);
 		this.add(versionText);
 	}
 	,__class__: game_states_TitleState
@@ -67794,7 +67793,7 @@ var lime_utils_AssetCache = function() {
 	this.audio = new haxe_ds_StringMap();
 	this.font = new haxe_ds_StringMap();
 	this.image = new haxe_ds_StringMap();
-	this.version = 977905;
+	this.version = 575839;
 };
 $hxClasses["lime.utils.AssetCache"] = lime_utils_AssetCache;
 lime_utils_AssetCache.__name__ = "lime.utils.AssetCache";
