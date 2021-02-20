@@ -14,6 +14,7 @@ import game.ext.KColor;
 import states.*;
 import game.char.*;
 import game.GameTypes;
+import flixel.system.FlxSound;
 
 using Lambda;
 using game.ext.MathExt;

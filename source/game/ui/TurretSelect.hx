@@ -4,6 +4,7 @@ class TurretSelect extends FlxTypedGroup<FlxSprite> {
 	public var position:FlxPoint;
 	public var background:FlxSprite;
 	public var selectionRect:FlxSprite;
+	public var rangeCircle:FlxSprite;
 	public var statText:FlxText;
 	public var borderSize:Float;
 	public var turretSprites:Array<FlxSprite>;
@@ -11,6 +12,7 @@ class TurretSelect extends FlxTypedGroup<FlxSprite> {
 	public var playerTurrets:FlxTypedGroup<Turret>;
 	public var currentTurretPosition:FlxSprite;
 	public var clickTurret:(TurretSelect, TurretData) -> Void;
+	public var buttonClickSound:FlxSound;
 
 	public static inline var WIDTH:Int = 400;
 	public static inline var HEIGHT:Int = 60;
@@ -24,10 +26,12 @@ class TurretSelect extends FlxTypedGroup<FlxSprite> {
 		turretSprites = [];
 		turretInfo = [];
 		this.playerTurrets = playerTurrets;
+		buttonClickSound = FlxG.sound.load(AssetPaths.button_click__wav);
 		create();
 	}
 
 	public function create() {
+		createRangeCircle(position);
 		createBackground(position);
 		createStatText(position);
 		createTurrets(position);
@@ -79,6 +83,14 @@ class TurretSelect extends FlxTypedGroup<FlxSprite> {
 		}
 	}
 
+	public function createRangeCircle(position:FlxPoint) {
+		rangeCircle = new FlxSprite(0, 0);
+		rangeCircle.makeGraphic(FlxG.width, FlxG.height, KColor.TRANSPARENT,
+			true);
+		rangeCircle.visible = false;
+		add(rangeCircle);
+	}
+
 	public function createSelectionRect(position:FlxPoint) {
 		selectionRect = new FlxSprite(0, 0);
 		// Add true here so that we don't affect other transparent spites
@@ -103,15 +115,35 @@ class TurretSelect extends FlxTypedGroup<FlxSprite> {
 			var turretData = turretInfo[i];
 			if (FlxG.mouse.overlaps(turret)
 				&& currentTurretPosition != null && FlxG.mouse.justPressed) {
-				// Handle Clicking Turret for creation
+				// Handle Clicking Turret for creation & Range Indicator
 				if (clickTurret != null) {
+					buttonClickSound.play();
 					clickTurret(this, turretData);
 				}
 			} else if (FlxG.mouse.overlaps(turret)) {
 				selectionRect.setPosition(turret.x, turret.y);
 				selectionRect.visible = true;
 				updateTurretInformation(turretData);
+				updateRangeIndicator(turretData);
 			}
+		}
+	}
+
+	public function updateRangeIndicator(turretData:TurretData) {
+		if (currentTurretPosition != null) {
+			rangeCircle.visible = true;
+			var pos = currentTurretPosition.getPosition();
+			rangeCircle.fill(KColor.TRANSPARENT); // CLear
+			var offsetY = 8;
+			var offsetX = -32;
+			rangeCircle.drawCircle(pos.x + offsetX, pos.y + offsetY,
+				turretData.range, KColor.TRANSPARENT, {
+					thickness: 5,
+					color: KColor.WHITE
+				});
+		} else {
+			rangeCircle.fill(KColor.TRANSPARENT); // CLear
+			rangeCircle.visible = false;
 		}
 	}
 
@@ -143,6 +175,8 @@ class TurretSelect extends FlxTypedGroup<FlxSprite> {
 
 	public function hide() {
 		currentTurretPosition = null;
+		rangeCircle.visible = false;
+		selectionRect.visible = false;
 		visible = false;
 	}
 }

@@ -35,6 +35,12 @@ class LevelState extends FlxState {
 	public var hud:PlayerHUD;
 	public var turretSelect:TurretSelect;
 
+	// Sounds
+	public var pauseSound:FlxSound;
+	public var menuIn:FlxSound;
+	public var menuOut:FlxSound;
+	public var damageSound:FlxSound;
+
 	// Groups
 	public var playerTurrets:FlxTypedGroup<Turret>;
 	public var playerDamageGrp:FlxTypedGroup<FlxSprite>;
@@ -52,6 +58,10 @@ class LevelState extends FlxState {
 		completeLevel = false;
 		gameOver = false;
 		levelScore = 0;
+		pauseSound = FlxG.sound.load(AssetPaths.pause_in__wav);
+		menuIn = FlxG.sound.load(AssetPaths.menu_open__wav);
+		menuOut = FlxG.sound.load(AssetPaths.turret_menu_exit__wav);
+		damageSound = FlxG.sound.load(AssetPaths.impact_heart__wav);
 		setSetupTime();
 		setLevelTime();
 		setTurretPoints();
@@ -61,7 +71,7 @@ class LevelState extends FlxState {
 	 * By default 60 seconds
 	 */
 	public function setSetupTime() {
-		setupTime = 1.0;
+		setupTime = 60.0;
 	}
 
 	/**
@@ -132,7 +142,9 @@ class LevelState extends FlxState {
 	public function clickTurret(tSelect:TurretSelect, turretData:TurretData) {
 		var tPos = tSelect.currentTurretPosition;
 		if (turretPoints >= turretData.cost && !tPos.overlaps(playerTurrets)) {
-			var turret = new Turret(tPos.x, tPos.y, turretData, playerBullets);
+			var yOffset = -6;
+			var turret = new Turret(tPos.x, tPos.y + yOffset, turretData,
+				playerBullets);
 			turret.setEnemyGrp(enemyGrp);
 			playerTurrets.add(turret);
 			turretPoints -= turretData.cost;
@@ -240,7 +252,7 @@ class LevelState extends FlxState {
 
 	public function processPause() {
 		if (FlxG.keys.anyJustPressed([ESCAPE])) {
-			trace('Pause Game');
+			pauseSound.play();
 			openSubState(new PauseSubState());
 		}
 	}
@@ -251,6 +263,7 @@ class LevelState extends FlxState {
 	}
 
 	public function enemyTouchDamageArea(enemy:Enemy, damageArea:FlxSprite) {
+		damageSound.play();
 		heart.health -= enemy.atk;
 		enemy.kill();
 		FlxG.camera.shake(0.01, 0.1);
@@ -276,9 +289,11 @@ class LevelState extends FlxState {
 	public function processUI(elapsed:Float) {
 		for (turretPosition in turretPositions.members) {
 			if (FlxG.mouse.overlaps(turretPosition) && FlxG.mouse.justPressed) {
+				menuIn.play();
 				turretSelect.currentTurretPosition = turretPosition;
 				turretSelect.show();
 			} else if (FlxG.keys.anyJustPressed([X])) {
+				menuOut.play();
 				turretSelect.hide();
 			}
 		}

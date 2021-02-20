@@ -5,6 +5,7 @@ import game.ui.TextButton;
 class PauseSubState extends FlxSubState {
 	public var pauseText:FlxText;
 
+	private var pauseExitSound:FlxSound;
 	private var initialPosition:Float;
 	private var timeCount:Float;
 
@@ -13,6 +14,7 @@ class PauseSubState extends FlxSubState {
 	}
 
 	override public function create() {
+		pauseExitSound = FlxG.sound.load(AssetPaths.pause_out__wav);
 		FlxG.mouse.visible = true;
 		pauseText = new FlxText(0, 0, -1, 'Pause', Globals.FONT_L);
 		pauseText.screenCenter();
@@ -51,10 +53,12 @@ class PauseSubState extends FlxSubState {
 	}
 
 	public function resumeGame() {
+		pauseExitSound.play();
 		close();
 	}
 
 	public function toTitle() {
+		pauseExitSound.play();
 		FlxG.camera.fade(KColor.BLACK, 1, false, () -> {
 			close();
 			// FlxG.camera.fade(KColor.BLACK, 1, true);
