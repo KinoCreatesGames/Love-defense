@@ -68,6 +68,9 @@ jobs:
     - name: Build Game
       run: haxelib run lime build html5
       
+    - name: Clear Old Game
+      run: rm -rf docs/
+      
       # Runs a single command using the runners shell
     - name: Create Documentation
       run: npm run gen:game
