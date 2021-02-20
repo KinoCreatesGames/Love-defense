@@ -156,7 +156,8 @@ class TurretSelect extends FlxTypedGroup<FlxSprite> {
 		var atk = '${turretData.atk}'.rpad(' ', 5);
 		var atkSpd = '${turretData.atkSpd}'.rpad(' ', 5);
 		var range = '${turretData.range}'.rpad(' ', 5);
-		statText.text = 'Name ${turretData.name.capitalize().rpad(' ', 7)} Atk ${atk} AtkSpd ${atkSpd} Rng ${range}';
+		var points = '${turretData.cost}'.rpad(' ', 3);
+		statText.text = 'Name ${turretData.name.capitalize().rpad(' ', 7)} Atk ${atk} AtkSpd ${atkSpd} Rng ${range} Pts ${points}';
 	}
 
 	public function move(x:Float, y:Float) {
@@ -182,6 +183,7 @@ class TurretSelect extends FlxTypedGroup<FlxSprite> {
 		currentTurretPosition = null;
 		rangeCircle.visible = false;
 		selectionRect.visible = false;
+		selectionRect.setPosition(0, 0);
 		visible = false;
 	}
 }
