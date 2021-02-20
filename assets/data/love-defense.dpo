@@ -171,7 +171,7 @@
                     "id": "1",
                     "name": "nature",
                     "health": 1,
-                    "atk": 2,
+                    "atk": 3,
                     "def": 1,
                     "spd": 1,
                     "atkSpd": 2.5,
@@ -184,10 +184,10 @@
                     "id": "2",
                     "name": "bomb",
                     "health": 1,
-                    "atk": 30,
+                    "atk": 10,
                     "def": 1,
                     "spd": 1,
-                    "atkSpd": 4.5,
+                    "atkSpd": 10,
                     "range": 125,
                     "sprite": "../../images/love-bomb-turret.png",
                     "cost": 125
@@ -197,11 +197,11 @@
                     "id": "3",
                     "name": "ice",
                     "health": 1,
-                    "atk": 3,
+                    "atk": 6,
                     "def": 1,
                     "spd": 1,
-                    "atkSpd": 3,
-                    "range": 50,
+                    "atkSpd": 5.5,
+                    "range": 60,
                     "sprite": "../../images/love-ice-turret.png",
                     "cost": 100
                 },
@@ -210,13 +210,13 @@
                     "id": "4",
                     "name": "flaming",
                     "health": 1,
-                    "atk": 5,
+                    "atk": 2,
                     "def": 1,
                     "spd": 1,
-                    "atkSpd": 1,
+                    "atkSpd": 0.5,
                     "range": 30,
                     "sprite": "../../images/love-flame-turret.png",
-                    "cost": 65
+                    "cost": 40
                 }
             ],
             "hidden": false,
@@ -362,7 +362,7 @@
                     "def": 1,
                     "spd": 20,
                     "health": 10,
-                    "points": 10,
+                    "points": 5,
                     "sprite": "../../images/enemyOne.png"
                 },
                 {
@@ -373,7 +373,7 @@
                     "def": 1,
                     "spd": 40,
                     "health": 7,
-                    "points": 20,
+                    "points": 10,
                     "sprite": "../../images/speedy.png"
                 }
             ],
