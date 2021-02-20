@@ -8,7 +8,7 @@
     "fakeWatch": "npx watchman-make -p 'source/**/*.hx' -r 'sh watcher.sh'",
     "watch": "nodemon --watch source -e hx,hxml,xml --exec npx lime build html5 -debug --connect 6000",
     "server": "npx http-server export/html5/bin",
-    "gen:game": " cp -r export/html5/bin docs/",
+    "gen:game": " cp -rf export/html5/bin docs/",
     "comp-server": "npx haxe -v --wait 6000"
   },
   "repository": {
