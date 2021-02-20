@@ -869,7 +869,7 @@ ApplicationMain.main = function() {
 ApplicationMain.create = function(config) {
 	var app = new openfl_display_Application();
 	ManifestResources.init(config);
-	app.meta.h["build"] = "32";
+	app.meta.h["build"] = "33";
 	app.meta.h["company"] = "KinoCreatesGames";
 	app.meta.h["file"] = "haxe-flixel-template";
 	app.meta.h["name"] = "Love Defense";
@@ -49233,8 +49233,9 @@ game_ui_TurretSelect.prototype = $extend(flixel_group_FlxTypedGroup.prototype,{
 		var atk = StringTools.rpad("" + turretData.atk," ",5);
 		var atkSpd = StringTools.rpad("" + turretData.atkSpd," ",5);
 		var range = StringTools.rpad("" + turretData.range," ",5);
+		var points = StringTools.rpad("" + turretData.cost," ",3);
 		var string = turretData.name;
-		this.statText.set_text("Name " + StringTools.rpad(string.charAt(0).toUpperCase() + HxOverrides.substr(string,1,null)," ",7) + " Atk " + atk + " AtkSpd " + atkSpd + " Rng " + range);
+		this.statText.set_text("Name " + StringTools.rpad(string.charAt(0).toUpperCase() + HxOverrides.substr(string,1,null)," ",7) + " Atk " + atk + " AtkSpd " + atkSpd + " Rng " + range + " Pts " + points);
 	}
 	,move: function(x,y) {
 		var _gthis = this;
@@ -49261,6 +49262,7 @@ game_ui_TurretSelect.prototype = $extend(flixel_group_FlxTypedGroup.prototype,{
 		this.currentTurretPosition = null;
 		this.rangeCircle.set_visible(false);
 		this.selectionRect.set_visible(false);
+		this.selectionRect.setPosition(0,0);
 		this.set_visible(false);
 	}
 	,__class__: game_ui_TurretSelect
@@ -67779,7 +67781,7 @@ var lime_utils_AssetCache = function() {
 	this.audio = new haxe_ds_StringMap();
 	this.font = new haxe_ds_StringMap();
 	this.image = new haxe_ds_StringMap();
-	this.version = 694335;
+	this.version = 453819;
 };
 $hxClasses["lime.utils.AssetCache"] = lime_utils_AssetCache;
 lime_utils_AssetCache.__name__ = "lime.utils.AssetCache";
