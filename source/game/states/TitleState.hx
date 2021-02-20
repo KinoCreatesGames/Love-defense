@@ -16,6 +16,7 @@ class TitleState extends FlxState {
 	#end
 
 	override public function create() {
+		FlxG.sound.playMusic(AssetPaths.title_music__ogg);
 		FlxG.mouse.visible = true;
 		bgColor = KColor.RICH_BLACK_FORGRA;
 		// Create Title Text
@@ -114,11 +115,11 @@ class TitleState extends FlxState {
 	}
 
 	public function clickStart() {
-		// var introText = DepotData.Cutscene.lines.getByFn((el) ->
-		// 	el.name == 'Intro');
-		// FlxG.switchState(new CutsceneState(new HubState(),
-		// 	introText.cutsceneText));
-		FlxG.switchState(new LevelOneState());
+		FlxG.camera.fade(KColor.BLACK, 1, false, () -> {
+			FlxG.sound.music.fadeOut(1);
+			FlxG.camera.fade(KColor.BLACK, 1, true);
+			FlxG.switchState(new LevelOneState());
+		});
 	}
 
 	#if desktop
