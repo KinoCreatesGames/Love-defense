@@ -869,7 +869,7 @@ ApplicationMain.main = function() {
 ApplicationMain.create = function(config) {
 	var app = new openfl_display_Application();
 	ManifestResources.init(config);
-	app.meta.h["build"] = "30";
+	app.meta.h["build"] = "31";
 	app.meta.h["company"] = "KinoCreatesGames";
 	app.meta.h["file"] = "haxe-flixel-template";
 	app.meta.h["name"] = "Love Defense";
@@ -49298,7 +49298,9 @@ game_ui_TurretSelect.prototype = $extend(flixel_group_FlxTypedGroup.prototype,{
 	}
 	,update: function(elapsed) {
 		flixel_group_FlxTypedGroup.prototype.update.call(this,elapsed);
-		this.updateSelection();
+		if(this.visible == true) {
+			this.updateSelection();
+		}
 	}
 	,updateSelection: function() {
 		var _g = 0;
@@ -67883,7 +67885,7 @@ var lime_utils_AssetCache = function() {
 	this.audio = new haxe_ds_StringMap();
 	this.font = new haxe_ds_StringMap();
 	this.image = new haxe_ds_StringMap();
-	this.version = 68328;
+	this.version = 658056;
 };
 $hxClasses["lime.utils.AssetCache"] = lime_utils_AssetCache;
 lime_utils_AssetCache.__name__ = "lime.utils.AssetCache";
