@@ -1,14 +1,12 @@
 package;
 
-import game.states.LevelOneState;
-import game.states.LevelState;
+import game.states.TitleState;
 import flixel.FlxGame;
 import openfl.display.Sprite;
-import game.states.PlayState;
 
 class Main extends Sprite {
 	public function new() {
 		super();
-		addChild(new FlxGame(0, 0, LevelOneState));
+		addChild(new FlxGame(0, 0, TitleState));
 	}
 }
