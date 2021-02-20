@@ -1,7 +1,6 @@
 package game.states;
 
 import game.ui.TurretSelect;
-import flixel.addons.editors.tiled.TiledObject;
 import game.ui.PlayerHUD;
 import flixel.FlxObject;
 import flixel.tile.FlxBaseTilemap.FlxTilemapAutoTiling;
