@@ -318,7 +318,8 @@ class LevelState extends FlxState {
 				menuIn.play();
 				turretSelect.currentTurretPosition = turretPosition;
 				turretSelect.show();
-			} else if (FlxG.keys.anyJustPressed([X])) {
+			} else if (FlxG.keys.anyJustPressed([X])
+				|| FlxG.mouse.justPressedRight) {
 				menuOut.play();
 				turretSelect.hide();
 			}
