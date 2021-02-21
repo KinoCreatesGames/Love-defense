@@ -869,7 +869,7 @@ ApplicationMain.main = function() {
 ApplicationMain.create = function(config) {
 	var app = new openfl_display_Application();
 	ManifestResources.init(config);
-	app.meta.h["build"] = "47";
+	app.meta.h["build"] = "48";
 	app.meta.h["company"] = "KinoCreatesGames";
 	app.meta.h["file"] = "haxe-flixel-template";
 	app.meta.h["name"] = "Love Defense";
@@ -48666,7 +48666,7 @@ game_states_LevelState.prototype = $extend(flixel_FlxState.prototype,{
 				this.menuIn.play();
 				this.turretSelect.currentTurretPosition = turretPosition;
 				this.turretSelect.show();
-			} else if(flixel_FlxG.keys.checkKeyArrayState([88],2)) {
+			} else if(flixel_FlxG.keys.checkKeyArrayState([88],2) || flixel_FlxG.mouse._rightButton.current == 2) {
 				this.menuOut.play();
 				this.turretSelect.hide();
 			}
@@ -67784,7 +67784,7 @@ var lime_utils_AssetCache = function() {
 	this.audio = new haxe_ds_StringMap();
 	this.font = new haxe_ds_StringMap();
 	this.image = new haxe_ds_StringMap();
-	this.version = 974350;
+	this.version = 318273;
 };
 $hxClasses["lime.utils.AssetCache"] = lime_utils_AssetCache;
 lime_utils_AssetCache.__name__ = "lime.utils.AssetCache";
