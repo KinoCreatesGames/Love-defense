@@ -869,7 +869,7 @@ ApplicationMain.main = function() {
 ApplicationMain.create = function(config) {
 	var app = new openfl_display_Application();
 	ManifestResources.init(config);
-	app.meta.h["build"] = "46";
+	app.meta.h["build"] = "47";
 	app.meta.h["company"] = "KinoCreatesGames";
 	app.meta.h["file"] = "haxe-flixel-template";
 	app.meta.h["name"] = "Love Defense";
@@ -48393,16 +48393,12 @@ game_states_GameOverSubState.prototype = $extend(flixel_FlxSubState.prototype,{
 		var padding = 24;
 		var x = this.background.x + padding;
 		var y = this.background.y + (this.background.get_height() - padding);
-		this.continueButton = new game_ui_TextButton(x,y,"Continue",12,$bind(this,this.clickContinue));
-		this.continueButton.hoverColor = -37993;
-		this.continueButton.clickColor = -15790578;
 		x = this.background.x + (this.background.get_width() - padding);
 		this.toTitleButton = new game_ui_TextButton(x,y,"To Title",12,$bind(this,this.clickToTitle));
 		var _g = this.toTitleButton;
 		_g.set_x(_g.x - this.toTitleButton.get_width());
 		this.toTitleButton.hoverColor = -37993;
 		this.toTitleButton.clickColor = -15790578;
-		this.add(this.continueButton);
 		this.add(this.toTitleButton);
 	}
 	,update: function(elapsed) {
@@ -48968,16 +48964,12 @@ game_states_WinSubState.prototype = $extend(flixel_FlxSubState.prototype,{
 		var padding = 24;
 		var x = this.background.x + padding;
 		var y = this.background.y + (this.background.get_height() - padding);
-		this.continueButton = new game_ui_TextButton(x,y,"Continue",12,$bind(this,this.clickContinue));
-		this.continueButton.hoverColor = -37993;
-		this.continueButton.clickColor = -15790578;
 		x = this.background.x + (this.background.get_width() - padding);
 		this.toTitleButton = new game_ui_TextButton(x,y,"To Title",12,$bind(this,this.clickToTitle));
 		var _g = this.toTitleButton;
 		_g.set_x(_g.x - this.toTitleButton.get_width());
 		this.toTitleButton.hoverColor = -37993;
 		this.toTitleButton.clickColor = -15790578;
-		this.add(this.continueButton);
 		this.add(this.toTitleButton);
 	}
 	,update: function(elapsed) {
@@ -67792,7 +67784,7 @@ var lime_utils_AssetCache = function() {
 	this.audio = new haxe_ds_StringMap();
 	this.font = new haxe_ds_StringMap();
 	this.image = new haxe_ds_StringMap();
-	this.version = 141185;
+	this.version = 974350;
 };
 $hxClasses["lime.utils.AssetCache"] = lime_utils_AssetCache;
 lime_utils_AssetCache.__name__ = "lime.utils.AssetCache";
